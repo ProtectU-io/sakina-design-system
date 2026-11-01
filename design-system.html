@@ -24,8 +24,7 @@
   .swatch div { height: 84px; }
   .swatch p { margin: 0; padding: 10px 12px; line-height: 1.5; }
   .swatch b { display: block; font-size: 13px; }
-  .panel { padding: 24px; border-radius: 24px; background: var(--surface); color: var(--on-surface); }
-  .panel.light, .panel.dark { flex: 1; min-width: 360px; display: flex; flex-direction: column; gap: 16px; }
+  .panel { max-width: 520px; padding: 24px; border-radius: 24px; background: var(--surface); color: var(--on-surface); display: flex; flex-direction: column; gap: 16px; }
   .type td { padding: 8px 16px 8px 0; vertical-align: baseline; }
   .type td:first-child { width: 160px; font-size: 12px; color: var(--page-muted); }
   .space { display: flex; align-items: flex-end; gap: 20px; }
@@ -110,44 +109,32 @@
   </div>
 
   <h2>Composants</h2>
-  <p>Chaque composant correspond à un widget Material 3 de Flutter.</p>
-  <div class="row">
-    <div class="panel light">
-      <div class="title-s muted">Thème clair</div>
-      <button class="btn block">Démarrer le trajet</button>
-      <div class="note">FilledButton</div>
-      <button class="btn tonal block"><span class="icon" style="--i:url(icons/share_location.svg)"></span>Partager mon trajet</button>
-      <div class="note">FilledButton.tonal</div>
-      <button class="btn outline block">Continuer avec Google</button>
-      <div class="note">OutlinedButton</div>
-      <div class="input"><span class="icon" style="--i:url(icons/search.svg)"></span>Où allez-vous ?</div>
-      <div class="note">SearchBar / TextField</div>
-      <div class="row" style="gap:8px"><span class="chip selected"><span class="icon" style="--i:url(icons/mosque.svg)"></span>Mosquées</span><span class="chip"><span class="icon" style="--i:url(icons/restaurant.svg)"></span>Restaurants</span><span class="chip"><span class="icon" style="--i:url(icons/storefront.svg)"></span>Boucheries</span></div>
-      <div class="note">FilterChip</div>
-      <div class="card" style="display:flex;gap:12px;align-items:center"><div class="avatar">A</div><div style="flex:1"><div class="title-s">Amina B.</div><div class="body-s muted">Sœur · contact de confiance</div></div><span class="icon muted" style="--i:url(icons/more_vert.svg)"></span></div>
-      <div class="note">Card + ListTile + CircleAvatar</div>
-      <div style="display:flex;gap:12px;align-items:center"><div class="switch on"></div><div class="switch"></div></div>
-      <div class="note">Switch</div>
-    </div>
-    <div class="panel dark">
-      <div class="title-s muted">Thème sombre</div>
-      <button class="btn block">J'y vais</button>
-      <div class="note" style="color:var(--on-surface-muted)">FilledButton</div>
-      <button class="btn tonal block">Arrêter le partage</button>
-      <div class="note" style="color:var(--on-surface-muted)">FilledButton.tonal</div>
-      <button class="btn alert block"><span class="icon fill" style="--i:url(icons/notifications_active-fill.svg)"></span>Envoyer l'alerte</button>
-      <div class="note" style="color:var(--on-surface-muted)">FilledButton (couleur alerte, réservé)</div>
-      <button class="btn outline block">Annuler</button>
-      <div class="note" style="color:var(--on-surface-muted)">OutlinedButton</div>
-      <div class="card" style="display:flex;gap:12px;align-items:center"><span class="icon" style="--i:url(icons/shield_person.svg);color:var(--sky)"></span><div class="body-m">Ne vous mettez jamais en danger. Appelez le 17 ou le 112.</div></div>
-      <div class="note" style="color:var(--on-surface-muted)">Card d'information</div>
-    </div>
+  <p>Chaque composant correspond à un widget Material 3 de Flutter. Ils suivent le mode clair / sombre choisi en haut de page.</p>
+  <div class="panel light" data-auto-theme>
+    <button class="btn block">Démarrer le trajet</button>
+    <div class="note">FilledButton</div>
+    <button class="btn tonal block"><span class="icon" style="--i:url(icons/share_location.svg)"></span>Partager mon trajet</button>
+    <div class="note">FilledButton.tonal</div>
+    <button class="btn alert block"><span class="icon fill" style="--i:url(icons/notifications_active-fill.svg)"></span>Envoyer l'alerte</button>
+    <div class="note">FilledButton (couleur alerte, réservé)</div>
+    <button class="btn outline block">Continuer avec Google</button>
+    <div class="note">OutlinedButton</div>
+    <div class="input"><span class="icon" style="--i:url(icons/search.svg)"></span>Où allez-vous ?</div>
+    <div class="note">SearchBar / TextField</div>
+    <div class="row" style="gap:8px"><span class="chip selected"><span class="icon" style="--i:url(icons/mosque.svg)"></span>Mosquées</span><span class="chip"><span class="icon" style="--i:url(icons/restaurant.svg)"></span>Restaurants</span><span class="chip"><span class="icon" style="--i:url(icons/storefront.svg)"></span>Boucheries</span></div>
+    <div class="note">FilterChip</div>
+    <div class="card" style="display:flex;gap:12px;align-items:center"><div class="avatar">A</div><div style="flex:1"><div class="title-s">Amina B.</div><div class="body-s muted">Sœur · contact de confiance</div></div><span class="icon muted" style="--i:url(icons/more_vert.svg)"></span></div>
+    <div class="note">Card + ListTile + CircleAvatar</div>
+    <div class="card" style="display:flex;gap:12px;align-items:center"><span class="icon" style="--i:url(icons/shield_person.svg);color:var(--sky)"></span><div class="body-m">Ne vous mettez jamais en danger. Appelez le 17 ou le 112.</div></div>
+    <div class="note">Card d'information</div>
+    <div style="display:flex;gap:12px;align-items:center"><div class="switch on"></div><div class="switch"></div></div>
+    <div class="note">Switch</div>
   </div>
 
   <h2>Navigation et alerte</h2>
   <p><code>NavigationBar</code> à 4 destinations + <code>FloatingActionButton.large</code> d'alerte, centré au-dessus de la barre. Déclenchement : appui long 2 s, puis compte à rebours de 5 s annulable.</p>
   <div class="row" style="align-items:center;gap:48px">
-    <div class="light" style="width:390px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)">
+    <div class="light" data-auto-theme style="width:390px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)">
       <nav class="navbar">
         <div class="item active"><div class="pill"><span class="icon fill" style="--i:url(icons/map-fill.svg)"></span></div><span class="label-m">Carte</span></div>
         <div class="item"><div class="pill"><span class="icon" style="--i:url(icons/mosque.svg)"></span></div><span class="label-m">Lieux</span></div>
