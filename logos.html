@@ -7,27 +7,27 @@
 <link rel="icon" href="logos/web/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="tokens.css">
 <style>
-  body { margin: 0; font-family: Inter, sans-serif; background: #fbf9f6; color: var(--midnight); }
+  body { margin: 0; font-family: Inter, sans-serif; background: var(--page); color: var(--page-text); }
   header { display: flex; align-items: center; gap: 24px; padding: 32px 48px; background: var(--midnight); color: var(--pearl); }
   header img { height: 56px; }
-  header nav { margin-left: auto; display: flex; gap: 24px; }
+  header nav { margin-left: auto; display: flex; align-items: center; gap: 24px; }
   header nav a { color: var(--gold-light); }
   header nav a[aria-current] { text-decoration: none; opacity: .6; }
   main { padding: 32px 48px 64px; max-width: 1200px; }
   h2 { font: 600 22px/28px Inter, sans-serif; margin: 48px 0 8px; }
-  h2 + p { margin: 0 0 20px; color: #5b6474; font-size: 14px; }
-  code { font-size: 12px; background: #efe9e1; padding: 2px 6px; border-radius: 6px; }
+  h2 + p { margin: 0 0 20px; color: var(--page-muted); font-size: 14px; }
+  code { font-size: 12px; background: var(--code-bg); padding: 2px 6px; border-radius: 6px; }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
   .grid.wide { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-  figure { margin: 0; border-radius: 16px; overflow: hidden; background: #fff; box-shadow: var(--shadow); }
+  figure { margin: 0; border-radius: 16px; overflow: hidden; background: var(--page-card); box-shadow: var(--shadow); }
   figure > div { height: 160px; display: grid; place-items: center; padding: 24px; background: var(--pearl); }
   figure > div.dark { background: var(--midnight); }
   figure img { max-width: 100%; max-height: 100%; }
   figcaption { padding: 10px 12px; font-size: 12px; line-height: 1.5; }
   figcaption b { display: block; font-size: 13px; }
-  figcaption a { color: var(--sapphire); margin-right: 8px; }
+  figcaption a { margin-right: 8px; }
   .sizes { display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
-  .sizes span { display: block; font-size: 12px; text-align: center; margin-top: 6px; color: #5b6474; }
+  .sizes span { display: block; font-size: 12px; text-align: center; margin-top: 6px; color: var(--page-muted); }
 </style>
 </head>
 <body>
@@ -38,6 +38,7 @@
     <a href="index.html">Écrans</a>
     <a href="design-system.html">Design system</a>
     <a href="logos.html" aria-current="page">Logos</a>
+    <button class="theme-toggle" type="button" aria-label="Mode sombre" aria-pressed="false"><span class="icon">dark_mode</span></button>
   </nav>
 </header>
 <main>
@@ -129,5 +130,6 @@
   </div>
 
 </main>
+<script src="theme.js"></script>
 </body>
 </html>

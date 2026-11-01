@@ -6,29 +6,29 @@
 <title>Sakina · Design system</title>
 <link rel="stylesheet" href="tokens.css">
 <style>
-  body { margin: 0; font-family: Inter, sans-serif; background: #fbf9f6; color: var(--midnight); }
+  body { margin: 0; font-family: Inter, sans-serif; background: var(--page); color: var(--page-text); }
   header { display: flex; align-items: center; gap: 24px; padding: 32px 48px; background: var(--midnight); color: var(--pearl); }
   header img { height: 56px; }
-  header nav { margin-left: auto; display: flex; gap: 24px; }
+  header nav { margin-left: auto; display: flex; align-items: center; gap: 24px; }
   header nav a { color: var(--gold-light); }
   header nav a[aria-current] { text-decoration: none; opacity: .6; }
   main { padding: 32px 48px 64px; max-width: 1200px; }
   h2 { font: 600 22px/28px Inter, sans-serif; margin: 48px 0 8px; }
-  h2 + p { margin: 0 0 20px; color: #5b6474; font-size: 14px; }
+  h2 + p { margin: 0 0 20px; color: var(--page-muted); font-size: 14px; }
   .row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
-  .swatch { width: 150px; border-radius: 16px; overflow: hidden; background: #fff; box-shadow: var(--shadow); font-size: 12px; }
+  .swatch { width: 150px; border-radius: 16px; overflow: hidden; background: var(--page-card); box-shadow: var(--shadow); font-size: 12px; }
   .swatch div { height: 84px; }
   .swatch p { margin: 0; padding: 10px 12px; line-height: 1.5; }
   .swatch b { display: block; font-size: 13px; }
   .panel { padding: 24px; border-radius: 24px; background: var(--surface); color: var(--on-surface); }
   .panel.light, .panel.dark { flex: 1; min-width: 360px; display: flex; flex-direction: column; gap: 16px; }
   .type td { padding: 8px 16px 8px 0; vertical-align: baseline; }
-  .type td:first-child { width: 160px; font-size: 12px; color: #5b6474; }
+  .type td:first-child { width: 160px; font-size: 12px; color: var(--page-muted); }
   .space { display: flex; align-items: flex-end; gap: 20px; }
   .space > div > div { background: var(--sky); border-radius: 4px; }
   .space span { display: block; font-size: 12px; margin-top: 6px; text-align: center; }
-  code { font-size: 12px; background: #efe9e1; padding: 2px 6px; border-radius: 6px; }
-  .note { font-size: 13px; color: #5b6474; }
+  code { font-size: 12px; background: var(--code-bg); padding: 2px 6px; border-radius: 6px; }
+  .note { font-size: 13px; color: var(--on-surface-muted, var(--page-muted)); } /* panel tokens first, page otherwise */
   .pictos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
   .picto { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; font-size: 13px; }
   .picto i { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; }
@@ -42,6 +42,7 @@
     <a href="index.html">Écrans</a>
     <a href="design-system.html" aria-current="page">Design system</a>
     <a href="logos.html">Logos</a>
+    <button class="theme-toggle" type="button" aria-label="Mode sombre" aria-pressed="false"><span class="icon">dark_mode</span></button>
   </nav>
 </header>
 <main>
@@ -174,10 +175,10 @@
   <h2>Logos</h2>
   <p>Aperçu. Toutes les déclinaisons et les fichiers sont sur la <a href="logos.html">page Logos</a>.</p>
   <div class="row" style="gap:32px;align-items:center">
-    <img src="logos/svg/sakina-horizontal-bicolore.svg" alt="" height="56">
-    <img src="logos/svg/sakina-symbole-bicolore.svg" alt="" height="56">
+    <div style="background:var(--pearl);padding:16px;border-radius:16px;display:flex;gap:32px"><img src="logos/svg/sakina-horizontal-bicolore.svg" alt="" height="56"><img src="logos/svg/sakina-symbole-bicolore.svg" alt="" height="56"></div>
     <div style="background:var(--midnight);padding:16px;border-radius:16px"><img src="logos/svg/sakina-horizontal-or.svg" alt="" height="48"></div>
   </div>
 </main>
+<script src="theme.js"></script>
 </body>
 </html>

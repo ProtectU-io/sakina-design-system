@@ -40,7 +40,35 @@
   --r-pill: 999px;
 
   --shadow: 0 4px 16px rgb(20 32 78 / 0.12);
+
+  /* Page chrome around the mockups (not the app), switched by theme.js */
+  --page: #fbf9f6;
+  --page-text: var(--midnight);
+  --page-muted: #5b6474;
+  --page-card: #ffffff;
+  --page-link: var(--sapphire);
+  --code-bg: #efe9e1;
+  color-scheme: light;
 }
+
+:root[data-theme="dark"] {
+  --page: #121a26;
+  --page-text: var(--pearl);
+  --page-muted: #a9b3c2;
+  --page-card: #1c2737;
+  --page-link: var(--sky);
+  --code-bg: #2c3d55;
+  color-scheme: dark;
+}
+
+a { color: var(--page-link); }
+
+/* Header light/dark switch */
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  border: 1px solid rgb(252 229 162 / 0.4); background: transparent; color: var(--gold-light);
+}
+.theme-toggle:hover { background: rgb(252 229 162 / 0.12); }
 
 /* Light theme (AppTheme.light): surface pearl, onSurface midnight, primary gold */
 .light {
@@ -56,6 +84,8 @@
   --secondary: var(--sapphire);
   --on-secondary: #ffffff;
   --outline: #cfc5b8;
+  --gold-ink: #8a6420; /* gold text/icons on light surfaces */
+  --alert-ink: var(--alert);
 }
 
 /* Dark theme (AppTheme.dark): surface midnight, onSurface pearl, primary light gold */
@@ -71,6 +101,8 @@
   --secondary: var(--sky);
   --on-secondary: var(--navy);
   --outline: #3e506a;
+  --gold-ink: var(--gold-light);
+  --alert-ink: #e8897c; /* brick red lifted for contrast on midnight */
 }
 
 /* Mobile type scale (AppTextStyles *Mobile) */
