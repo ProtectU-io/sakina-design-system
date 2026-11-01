@@ -47,7 +47,7 @@
 <main>
 
   <h2>Interface</h2>
-  <p>Material Symbols Rounded, 24 px, poids 400. Utilisation : <code>&lt;span class="icon" style="--i:url(icons/mosque.svg)"&gt;&lt;/span&gt;</code>. À gauche le contour, à droite la version pleine quand elle est utilisée (<code>&lt;nom&gt;-fill.svg</code> : marqueurs, SOS, onglet actif).</p>
+  <p>Material Symbols Rounded, 24 px, poids 400. Utilisation : <code>&lt;span class="icon" style="--i:url(icons/mosque.svg)"&gt;&lt;/span&gt;</code>. À gauche le contour, à droite la version pleine (<code>&lt;nom&gt;-fill.svg</code> : marqueurs, SOS, onglet actif…). Certaines icônes n’ont pas de variante pleine distincte dans Material : les deux fichiers sont alors identiques.</p>
   <div class="grid" id="ui"></div>
 
   <h2>Marques</h2>
@@ -59,15 +59,13 @@
 
 </main>
 <script>
-  // Keep in sync with icons/ (one <name>.svg each, plus <name>-fill.svg for the filled ones)
+  // Keep in sync with icons/ (one <name>.svg each, plus <name>-fill.svg)
   const icons = "accessible add_location_alt arrow_back auto_awesome badge battery_full call chat check check_circle chevron_right circle close contacts dark_mode directions directions_bus directions_car directions_walk diversity_3 do_not_step download edit expand_more favorite front_hand gavel group groups home ios_share language layers light_mode location_on lock logout mail map mic more_horiz more_vert mosque my_location navigation notifications notifications_active person person_add photo_camera radio_button_checked record_voice_over report restaurant route schedule school search send share_location shield shield_person signal_cellular_alt sos storefront support_agent swap_vert turn_left verified_user visibility visibility_off volunteer_activism warning wifi woman".split(" ");
-  const filled = new Set("call circle directions_walk do_not_step front_hand group home location_on map mosque notifications_active person record_voice_over restaurant send shield sos storefront visibility warning".split(" "));
   const glyph = (file) => `<span class="icon" style="--i:url(icons/${file})"></span>`;
-  document.getElementById("ui").innerHTML = icons.map((n) => {
-    const fill = filled.has(n);
-    return `<figure><div>${glyph(n + ".svg")}${fill ? glyph(n + "-fill.svg") : ""}</div>` +
-      `<figcaption><b>${n}</b><a href="icons/${n}.svg" download>SVG</a>${fill ? `<a href="icons/${n}-fill.svg" download>Plein</a>` : ""}</figcaption></figure>`;
-  }).join("");
+  document.getElementById("ui").innerHTML = icons.map((n) =>
+    `<figure><div>${glyph(n + ".svg")}${glyph(n + "-fill.svg")}</div>` +
+    `<figcaption><b>${n}</b><a href="icons/${n}.svg" download>SVG</a><a href="icons/${n}-fill.svg" download>Plein</a></figcaption></figure>`
+  ).join("");
 </script>
 <script src="theme.js"></script>
 </body>
