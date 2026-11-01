@@ -9,7 +9,9 @@
   body { margin: 0; font-family: Inter, sans-serif; background: #fbf9f6; color: var(--midnight); }
   header { display: flex; align-items: center; gap: 24px; padding: 32px 48px; background: var(--midnight); color: var(--pearl); }
   header img { height: 56px; }
-  header a { color: var(--gold-light); margin-left: auto; }
+  header nav { margin-left: auto; display: flex; gap: 24px; }
+  header nav a { color: var(--gold-light); }
+  header nav a[aria-current] { text-decoration: none; opacity: .6; }
   main { padding: 32px 48px 64px; max-width: 1200px; }
   h2 { font: 600 22px/28px Inter, sans-serif; margin: 48px 0 8px; }
   h2 + p { margin: 0 0 20px; color: #5b6474; font-size: 14px; }
@@ -36,7 +38,11 @@
 <header>
   <img src="assets/sakina-horizontal-blanc.svg" alt="Sakina">
   <div><div class="title-l">Design system</div><div class="body-m" style="opacity:.75">Référence pour <code style="background:#2c3d55;color:var(--pearl)">packages/sakina_ui</code></div></div>
-  <a href="index.html">Voir les écrans →</a>
+  <nav>
+    <a href="index.html">Écrans</a>
+    <a href="design-system.html" aria-current="page">Design system</a>
+    <a href="logos.html">Logos</a>
+  </nav>
 </header>
 <main>
 
@@ -166,7 +172,7 @@
   </div>
 
   <h2>Logos</h2>
-  <p>Fichiers de <code>assets/logos/svg</code>, utilisés tels quels.</p>
+  <p>Aperçu. Toutes les déclinaisons et les fichiers sont sur la <a href="logos.html">page Logos</a>.</p>
   <div class="row" style="gap:32px;align-items:center">
     <img src="assets/sakina-horizontal-bicolore.svg" alt="" height="56">
     <img src="assets/sakina-symbole-bicolore.svg" alt="" height="56">
