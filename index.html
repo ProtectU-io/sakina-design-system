@@ -124,7 +124,7 @@
 
 <header>
   <img src="logos/svg/sakina-horizontal-blanc.svg" alt="Sakina">
-  <div><div class="title-l">Maquettes · MVP</div><div class="body-m" style="opacity:.75">17 écrans statiques · 390 × 844 · références pour l'implémentation Flutter</div></div>
+  <div><div class="title-l">Maquettes · MVP</div><div class="body-m" style="opacity:.75">19 écrans statiques · 390 × 844 · références pour l'implémentation Flutter</div></div>
   <nav>
     <a href="index.html" aria-current="page">Écrans</a>
     <a href="design-system.html">Design system</a>
@@ -290,6 +290,7 @@
   <div style="position:relative;z-index:4;padding:4px 16px 0" class="stack">
     <div class="hstack">
       <div class="input grow" style="box-shadow:var(--shadow);border:0"><span class="icon" style="--i:url(icons/search.svg)"></span>Où allez-vous ?</div>
+      <div class="ai-btn" aria-label="Assistant Sakina"><span class="icon" style="--i:url(icons/auto_awesome.svg)"></span></div>
       <div class="avatar" style="width:48px;height:48px;box-shadow:var(--shadow)">S</div>
     </div>
     <div class="hstack" style="gap:8px;overflow:hidden">
@@ -428,7 +429,10 @@
       <div class="divider"></div>
       <div class="tile"><div class="avatar">A</div><div class="grow"><div class="title-s">Amina · proche</div><div class="body-s muted">Suit votre position</div></div><span class="icon" style="--i:url(icons/share_location.svg);color:var(--secondary)"></span></div>
     </div>
-    <div class="card hstack dark" style="margin-top:12px;background:var(--navy)"><span class="icon" style="--i:url(icons/support_agent.svg);color:var(--sky)"></span><div class="grow body-s">Besoin d'être accompagné ensuite ? Le soutien juridique arrive bientôt.</div></div>
+    <div class="card stack" style="margin-top:12px;gap:6px">
+      <div class="hstack"><span class="icon" style="--i:url(icons/chat.svg);color:var(--secondary)"></span><div class="grow title-s">Conversation · 3 participants</div><span class="icon muted" style="--i:url(icons/chevron_right.svg)"></span></div>
+      <div class="body-s muted"><b>Assistant Sakina :</b> Karim arrive dans 3 min. Restez visible, près de la pharmacie.</div>
+    </div>
     <div style="flex:1"></div>
     <div class="stack" style="gap:12px">
       <button class="btn alert block"><span class="icon fill" style="--i:url(icons/call-fill.svg)"></span>Appeler le 17</button>
@@ -454,20 +458,80 @@
     <div class="card hstack" style="margin-top:20px;background:var(--alert-soft);color:var(--navy);align-items:flex-start"><span class="icon fill" style="--i:url(icons/shield-fill.svg);color:var(--alert)"></span><div class="body-s"><b>Ne vous mettez jamais en danger.</b> Si la situation est violente, appelez le 17 ou le 112. Votre présence suffit souvent.</div></div>
     <div style="flex:1"></div>
     <div class="stack" style="gap:12px">
-      <button class="btn block"><span class="icon" style="--i:url(icons/directions_walk.svg)"></span>J'y vais · 4 min</button>
+      <div class="hstack"><button class="btn grow"><span class="icon" style="--i:url(icons/directions_walk.svg)"></span>J'y vais · 4 min</button><button class="btn tonal"><span class="icon" style="--i:url(icons/chat.svg)"></span>Écrire</button></div>
       <div class="hstack"><button class="btn outline grow" style="height:48px"><span class="icon" style="--i:url(icons/call.svg)"></span>Appeler le 17</button><button class="btn outline grow" style="height:48px">Je ne peux pas</button></div>
     </div>
   </div>
   <div class="home-ind"></div>
 </div></figure>
 
-<!-- 14 Places list -->
-<figure><figcaption>14 · Lieux de confiance<span>onglet Lieux (Halal places)</span></figcaption>
+<!-- 14 Alert conversation -->
+<figure><figcaption>14 · Conversation d'alerte<span>ouverte aux personnes alertées · côté personne en difficulté</span></figcaption>
+<div class="screen dark" data-auto-theme>
+  <div class="status"><span>21:40</span><span class="icons"><span class="icon" style="--i:url(icons/signal_cellular_alt.svg)"></span><span class="icon" style="--i:url(icons/wifi.svg)"></span><span class="icon" style="--i:url(icons/battery_full.svg)"></span></span></div>
+  <div class="appbar" style="padding:0 12px">
+    <div class="iconbtn"><span class="icon" style="--i:url(icons/arrow_back.svg)"></span></div>
+    <div class="grow"><div class="title-m">Conversation d'alerte</div><div class="body-s muted">Karim, Sarah, Amina · Assistant Sakina</div></div>
+    <div class="iconbtn" aria-label="Signaler un abus"><span class="icon" style="--i:url(icons/more_vert.svg)"></span></div>
+  </div>
+  <div class="body stack" style="gap:10px;padding-top:8px">
+    <span class="badge" style="background:var(--alert);color:#fff;align-self:center"><span class="icon fill" style="--i:url(icons/sos-fill.svg);font-size:14px"></span>Alerte active · 3 personnes en route</span>
+    <div class="label-s muted" style="text-align:center">Visible uniquement par les personnes alertées</div>
+    <div class="ai-msg">
+      <div class="from"><span class="icon" style="--i:url(icons/auto_awesome.svg)"></span>Assistant Sakina</div>
+      Karim arrive dans 3 min. Restez dans un endroit éclairé et fréquenté. Si la situation devient violente, appelez le 17.
+      <div class="actions"><button class="btn alert"><span class="icon fill" style="--i:url(icons/call-fill.svg)"></span>Appeler le 17</button><button class="btn outline"><span class="icon" style="--i:url(icons/gavel.svg)"></span>Soutien juridique</button></div>
+    </div>
+    <div class="bubble"><span class="from">Karim · membre à 300 m</span>J'arrive par la rue Myrha, veste bleue.</div>
+    <div class="bubble mine">Je suis devant la pharmacie, à l'angle.</div>
+    <div class="bubble"><span class="from">Amina · proche</span>Je te suis sur la carte. Je t'appelle dès que tu veux.</div>
+  </div>
+  <div class="composer" style="padding:8px 16px 34px">
+    <div class="input">Écrire un message…</div>
+    <div class="send" aria-label="Envoyer"><span class="icon fill" style="--i:url(icons/send-fill.svg)"></span></div>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 15 AI assistant -->
+<figure><figcaption>15 · Assistant Sakina<span>bouton IA en haut des onglets · conseils et orientation</span></figcaption>
+<div class="screen light" data-auto-theme>
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon" style="--i:url(icons/signal_cellular_alt.svg)"></span><span class="icon" style="--i:url(icons/wifi.svg)"></span><span class="icon" style="--i:url(icons/battery_full.svg)"></span></span></div>
+  <div class="appbar" style="padding:0 12px">
+    <div class="iconbtn"><span class="icon" style="--i:url(icons/arrow_back.svg)"></span></div>
+    <div class="ai-btn" style="box-shadow:none"><span class="icon" style="--i:url(icons/auto_awesome.svg)"></span></div>
+    <div class="grow"><div class="title-m">Assistant Sakina</div><div class="body-s muted">Conseils et orientation</div></div>
+  </div>
+  <div class="body stack" style="gap:10px;padding-top:8px">
+    <div class="card hstack" style="padding:10px 14px;background:var(--alert-soft);color:var(--navy)"><span class="icon fill" style="--i:url(icons/shield-fill.svg);color:var(--alert);font-size:20px"></span><div class="body-s">L'assistant ne remplace pas les secours. <b>En danger, appelez le 17.</b></div></div>
+    <div class="ai-msg">
+      <div class="from"><span class="icon" style="--i:url(icons/auto_awesome.svg)"></span>Assistant Sakina</div>
+      Bonjour Salma. Je peux vous aider à préparer un trajet, comprendre vos droits ou trouver un lieu sûr.
+    </div>
+    <div class="hstack" style="gap:8px;flex-wrap:wrap">
+      <span class="chip">Que faire si l'on me suit ?</span><span class="chip">Lieu ouvert la nuit</span><span class="chip">Porter plainte</span>
+    </div>
+    <div class="bubble mine">On m'a insultée dans le métro hier. Que puis-je faire ?</div>
+    <div class="ai-msg">
+      <div class="from"><span class="icon" style="--i:url(icons/auto_awesome.svg)"></span>Assistant Sakina</div>
+      Vous pouvez porter plainte au commissariat, même sans connaître l'auteur. Notez dès maintenant la date, l'heure, la ligne et les témoins éventuels.
+      <div class="actions"><button class="btn tonal"><span class="icon" style="--i:url(icons/report.svg)"></span>Signaler</button><button class="btn outline"><span class="icon" style="--i:url(icons/gavel.svg)"></span>Soutien juridique</button></div>
+    </div>
+  </div>
+  <div class="composer" style="padding:8px 16px 34px">
+    <div class="input">Posez votre question…</div>
+    <div class="send" aria-label="Envoyer"><span class="icon fill" style="--i:url(icons/send-fill.svg)"></span></div>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 16 Places list -->
+<figure><figcaption>16 · Lieux de confiance<span>onglet Lieux (Halal places)</span></figcaption>
 <div class="screen light" data-auto-theme>
   <div class="status"><span>9:41</span><span class="icons"><span class="icon" style="--i:url(icons/signal_cellular_alt.svg)"></span><span class="icon" style="--i:url(icons/wifi.svg)"></span><span class="icon" style="--i:url(icons/battery_full.svg)"></span></span></div>
   <div class="body" style="padding:0">
     <div style="padding:8px 24px 0" class="stack">
-      <div class="hstack"><div class="headline-l grow">Lieux</div><div class="iconbtn"><span class="icon" style="--i:url(icons/map.svg)"></span></div></div>
+      <div class="hstack"><div class="headline-l grow">Lieux</div><div class="iconbtn"><span class="icon" style="--i:url(icons/map.svg)"></span></div><div class="ai-btn" aria-label="Assistant Sakina"><span class="icon" style="--i:url(icons/auto_awesome.svg)"></span></div></div>
       <div class="input"><span class="icon" style="--i:url(icons/search.svg)"></span>Mosquée, boucherie, association…</div>
     </div>
     <div class="hstack" style="gap:8px;padding:14px 24px;overflow:hidden">
@@ -491,8 +555,8 @@
   <div class="home-ind"></div>
 </div></figure>
 
-<!-- 15 Place detail -->
-<figure><figcaption>15 · Fiche d'un lieu<span>détail et itinéraire</span></figcaption>
+<!-- 17 Place detail -->
+<figure><figcaption>17 · Fiche d'un lieu<span>détail et itinéraire</span></figcaption>
 <div class="screen light" data-auto-theme>
   <div style="position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(160deg,var(--sapphire),var(--midnight));display:grid;place-items:center"><span class="icon fill" style="--i:url(icons/mosque-fill.svg);font-size:96px;color:rgb(252 229 162 / .85)"></span></div>
   <div class="status dark" style="color:var(--pearl)"><span>9:41</span><span class="icons"><span class="icon" style="--i:url(icons/signal_cellular_alt.svg)"></span><span class="icon" style="--i:url(icons/wifi.svg)"></span><span class="icon" style="--i:url(icons/battery_full.svg)"></span></span></div>
@@ -519,12 +583,12 @@
   <div class="home-ind"></div>
 </div></figure>
 
-<!-- 16 Trusted contacts -->
-<figure><figcaption>16 · Proches<span>contacts de confiance et suivi</span></figcaption>
+<!-- 18 Trusted contacts -->
+<figure><figcaption>18 · Proches<span>contacts de confiance et suivi</span></figcaption>
 <div class="screen light" data-auto-theme>
   <div class="status"><span>9:41</span><span class="icons"><span class="icon" style="--i:url(icons/signal_cellular_alt.svg)"></span><span class="icon" style="--i:url(icons/wifi.svg)"></span><span class="icon" style="--i:url(icons/battery_full.svg)"></span></span></div>
   <div class="body">
-    <div class="headline-l" style="margin-top:8px">Proches</div>
+    <div class="hstack" style="margin-top:8px"><div class="headline-l grow">Proches</div><div class="ai-btn" aria-label="Assistant Sakina"><span class="icon" style="--i:url(icons/auto_awesome.svg)"></span></div></div>
     <div class="body-m muted" style="margin:6px 0 20px">Ils sont prévenus quand vous signalez, alertez ou partagez un trajet.</div>
     <div class="card stack dark" style="background:var(--navy);gap:12px">
       <div class="hstack"><div class="avatar" style="background:var(--gold-light);color:var(--navy)">Y</div><div class="grow"><div class="title-s">Youssef est en trajet</div><div class="body-s" style="opacity:.75">Arrivée prévue 21:47 · 900 m restants</div></div><span class="badge live"><span class="icon fill" style="--i:url(icons/circle-fill.svg);font-size:12px"></span>En direct</span></div>
@@ -550,12 +614,12 @@
   <div class="home-ind"></div>
 </div></figure>
 
-<!-- 17 Profile -->
-<figure><figcaption>17 · Profil et confidentialité<span>réglages et données</span></figcaption>
+<!-- 19 Profile -->
+<figure><figcaption>19 · Profil et confidentialité<span>réglages et données</span></figcaption>
 <div class="screen light" data-auto-theme>
   <div class="status"><span>9:41</span><span class="icons"><span class="icon" style="--i:url(icons/signal_cellular_alt.svg)"></span><span class="icon" style="--i:url(icons/wifi.svg)"></span><span class="icon" style="--i:url(icons/battery_full.svg)"></span></span></div>
   <div class="body">
-    <div class="hstack" style="margin:8px 0 20px"><div class="avatar" style="width:64px;height:64px;font-size:24px">S</div><div class="grow"><div class="headline-s">Salma Diallo</div><div class="body-s muted">salma.d@exemple.fr</div></div><span class="icon muted" style="--i:url(icons/edit.svg)"></span></div>
+    <div class="hstack" style="margin:8px 0 20px"><div class="avatar" style="width:64px;height:64px;font-size:24px">S</div><div class="grow"><div class="headline-s">Salma Diallo</div><div class="body-s muted">salma.d@exemple.fr</div></div><span class="icon muted" style="--i:url(icons/edit.svg)"></span><div class="ai-btn" aria-label="Assistant Sakina"><span class="icon" style="--i:url(icons/auto_awesome.svg)"></span></div></div>
     <div class="label-m muted" style="margin-bottom:4px">CONFIDENTIALITÉ</div>
     <div class="card" style="padding:0 16px">
       <div class="tile"><span class="icon muted" style="--i:url(icons/share_location.svg)"></span><div class="grow"><div class="title-s">Partage de position</div><div class="body-s muted">Uniquement pendant un trajet</div></div><div class="switch on"></div></div>
