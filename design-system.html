@@ -47,7 +47,7 @@
     <a href="design-system.html" aria-current="page">Design system</a>
     <a href="logos.html">Logos</a>
     <a href="icons.html">Icônes</a>
-    <button class="theme-toggle" type="button" aria-label="Mode sombre" aria-pressed="false"><span class="icon">dark_mode</span></button>
+    <button class="theme-toggle" type="button" aria-label="Mode sombre" aria-pressed="false"><span class="icon" style="--i:url(icons/dark_mode.svg)"></span></button>
   </nav>
 </header>
 <main>
@@ -116,15 +116,15 @@
       <div class="title-s muted">Thème clair</div>
       <button class="btn block">Démarrer le trajet</button>
       <div class="note">FilledButton</div>
-      <button class="btn tonal block"><span class="icon">share_location</span>Partager mon trajet</button>
+      <button class="btn tonal block"><span class="icon" style="--i:url(icons/share_location.svg)"></span>Partager mon trajet</button>
       <div class="note">FilledButton.tonal</div>
       <button class="btn outline block">Continuer avec Google</button>
       <div class="note">OutlinedButton</div>
-      <div class="input"><span class="icon">search</span>Où allez-vous ?</div>
+      <div class="input"><span class="icon" style="--i:url(icons/search.svg)"></span>Où allez-vous ?</div>
       <div class="note">SearchBar / TextField</div>
-      <div class="row" style="gap:8px"><span class="chip selected"><span class="icon">mosque</span>Mosquées</span><span class="chip"><span class="icon">restaurant</span>Restaurants</span><span class="chip"><span class="icon">storefront</span>Boucheries</span></div>
+      <div class="row" style="gap:8px"><span class="chip selected"><span class="icon" style="--i:url(icons/mosque.svg)"></span>Mosquées</span><span class="chip"><span class="icon" style="--i:url(icons/restaurant.svg)"></span>Restaurants</span><span class="chip"><span class="icon" style="--i:url(icons/storefront.svg)"></span>Boucheries</span></div>
       <div class="note">FilterChip</div>
-      <div class="card" style="display:flex;gap:12px;align-items:center"><div class="avatar">A</div><div style="flex:1"><div class="title-s">Amina B.</div><div class="body-s muted">Sœur · contact de confiance</div></div><span class="icon muted">more_vert</span></div>
+      <div class="card" style="display:flex;gap:12px;align-items:center"><div class="avatar">A</div><div style="flex:1"><div class="title-s">Amina B.</div><div class="body-s muted">Sœur · contact de confiance</div></div><span class="icon muted" style="--i:url(icons/more_vert.svg)"></span></div>
       <div class="note">Card + ListTile + CircleAvatar</div>
       <div style="display:flex;gap:12px;align-items:center"><div class="switch on"></div><div class="switch"></div></div>
       <div class="note">Switch</div>
@@ -135,11 +135,11 @@
       <div class="note" style="color:var(--on-surface-muted)">FilledButton</div>
       <button class="btn tonal block">Arrêter le partage</button>
       <div class="note" style="color:var(--on-surface-muted)">FilledButton.tonal</div>
-      <button class="btn alert block"><span class="icon fill">notifications_active</span>Envoyer l'alerte</button>
+      <button class="btn alert block"><span class="icon fill" style="--i:url(icons/notifications_active-fill.svg)"></span>Envoyer l'alerte</button>
       <div class="note" style="color:var(--on-surface-muted)">FilledButton (couleur alerte, réservé)</div>
       <button class="btn outline block">Annuler</button>
       <div class="note" style="color:var(--on-surface-muted)">OutlinedButton</div>
-      <div class="card" style="display:flex;gap:12px;align-items:center"><span class="icon" style="color:var(--sky)">shield_person</span><div class="body-m">Ne vous mettez jamais en danger. Appelez le 17 ou le 112.</div></div>
+      <div class="card" style="display:flex;gap:12px;align-items:center"><span class="icon" style="--i:url(icons/shield_person.svg);color:var(--sky)"></span><div class="body-m">Ne vous mettez jamais en danger. Appelez le 17 ou le 112.</div></div>
       <div class="note" style="color:var(--on-surface-muted)">Card d'information</div>
     </div>
   </div>
@@ -149,32 +149,32 @@
   <div class="row" style="align-items:center;gap:48px">
     <div class="light" style="width:390px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)">
       <nav class="navbar">
-        <div class="item active"><div class="pill"><span class="icon">map</span></div><span class="label-m">Carte</span></div>
-        <div class="item"><div class="pill"><span class="icon">mosque</span></div><span class="label-m">Lieux</span></div>
-        <div class="item"><div class="pill"><span class="icon">group</span></div><span class="label-m">Proches</span></div>
-        <div class="item"><div class="pill"><span class="icon">person</span></div><span class="label-m">Profil</span></div>
+        <div class="item active"><div class="pill"><span class="icon fill" style="--i:url(icons/map-fill.svg)"></span></div><span class="label-m">Carte</span></div>
+        <div class="item"><div class="pill"><span class="icon" style="--i:url(icons/mosque.svg)"></span></div><span class="label-m">Lieux</span></div>
+        <div class="item"><div class="pill"><span class="icon" style="--i:url(icons/group.svg)"></span></div><span class="label-m">Proches</span></div>
+        <div class="item"><div class="pill"><span class="icon" style="--i:url(icons/person.svg)"></span></div><span class="label-m">Profil</span></div>
       </nav>
     </div>
-    <div style="text-align:center"><div class="sos"><span class="icon fill">sos</span></div><div class="note" style="margin-top:8px">Bouton d'alerte 72 × 72</div></div>
+    <div style="text-align:center"><div class="sos"><span class="icon fill" style="--i:url(icons/sos-fill.svg)"></span></div><div class="note" style="margin-top:8px">Bouton d'alerte 72 × 72</div></div>
   </div>
 
   <h2>Marqueurs de carte</h2>
   <p>Saphir : lieux communautaires · Or : commerces halal · Ambre : signalement · Brique : signalement grave.</p>
   <div class="row" style="gap:32px">
-    <div class="marker place"><span class="icon fill">mosque</span></div>
-    <div class="marker halal"><span class="icon fill">restaurant</span></div>
-    <div class="marker report"><span class="icon fill">visibility</span></div>
-    <div class="marker severe"><span class="icon fill">warning</span></div>
+    <div class="marker place"><span class="icon fill" style="--i:url(icons/mosque-fill.svg)"></span></div>
+    <div class="marker halal"><span class="icon fill" style="--i:url(icons/restaurant-fill.svg)"></span></div>
+    <div class="marker report"><span class="icon fill" style="--i:url(icons/visibility-fill.svg)"></span></div>
+    <div class="marker severe"><span class="icon fill" style="--i:url(icons/warning-fill.svg)"></span></div>
   </div>
 
   <h2>Catégories de signalement</h2>
   <p>Issues de la vision produit, à valider auprès des utilisateurs.</p>
   <div class="pictos">
-    <div class="picto"><i style="background:var(--alert-soft);color:var(--alert)"><span class="icon fill">front_hand</span></i>Agression</div>
-    <div class="picto"><i style="background:#f6ead2;color:#8a6420"><span class="icon fill">record_voice_over</span></i>Insulte ou menace</div>
-    <div class="picto"><i style="background:#f6ead2;color:#8a6420"><span class="icon fill">directions_walk</span></i>Suivi</div>
-    <div class="picto"><i style="background:#f6ead2;color:#8a6420"><span class="icon fill">mosque</span></i>Dégradation d'un lieu de culte</div>
-    <div class="picto"><i style="background:#dde6f2;color:var(--sapphire)"><span class="icon fill">do_not_step</span></i>Zone à éviter</div>
+    <div class="picto"><i style="background:var(--alert-soft);color:var(--alert)"><span class="icon fill" style="--i:url(icons/front_hand-fill.svg)"></span></i>Agression</div>
+    <div class="picto"><i style="background:#f6ead2;color:#8a6420"><span class="icon fill" style="--i:url(icons/record_voice_over-fill.svg)"></span></i>Insulte ou menace</div>
+    <div class="picto"><i style="background:#f6ead2;color:#8a6420"><span class="icon fill" style="--i:url(icons/directions_walk-fill.svg)"></span></i>Suivi</div>
+    <div class="picto"><i style="background:#f6ead2;color:#8a6420"><span class="icon fill" style="--i:url(icons/mosque-fill.svg)"></span></i>Dégradation d'un lieu de culte</div>
+    <div class="picto"><i style="background:#dde6f2;color:var(--sapphire)"><span class="icon fill" style="--i:url(icons/do_not_step-fill.svg)"></span></i>Zone à éviter</div>
   </div>
 
   <h2>Logos</h2>

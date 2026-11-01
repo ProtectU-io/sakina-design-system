@@ -23,8 +23,7 @@
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
   figure { margin: 0; border-radius: 16px; background: var(--page-card); box-shadow: var(--shadow); padding: 16px 12px 12px; text-align: center; }
   figure > div { display: flex; justify-content: center; gap: 16px; height: 32px; }
-  /* Mask so the glyph follows the page text colour in light and dark mode */
-  .glyph { width: 32px; height: 32px; background: currentColor; mask: var(--src) center / contain no-repeat; -webkit-mask: var(--src) center / contain no-repeat; }
+  figure .icon { font-size: 32px; }
   figure img { width: 32px; height: 32px; }
   [data-theme="dark"] .apple { filter: none; }
   .apple { filter: brightness(0); }
@@ -42,13 +41,13 @@
     <a href="design-system.html">Design system</a>
     <a href="logos.html">Logos</a>
     <a href="icons.html" aria-current="page">Icônes</a>
-    <button class="theme-toggle" type="button" aria-label="Mode sombre" aria-pressed="false"><span class="icon">dark_mode</span></button>
+    <button class="theme-toggle" type="button" aria-label="Mode sombre" aria-pressed="false"><span class="icon" style="--i:url(icons/dark_mode.svg)"></span></button>
   </nav>
 </header>
 <main>
 
   <h2>Interface</h2>
-  <p>Material Symbols Rounded, 24 px, poids 400. À gauche le contour, à droite la version pleine quand elle est utilisée (<code>.icon.fill</code>, onglet actif).</p>
+  <p>Material Symbols Rounded, 24 px, poids 400. Utilisation : <code>&lt;span class="icon" style="--i:url(icons/mosque.svg)"&gt;&lt;/span&gt;</code>. À gauche le contour, à droite la version pleine quand elle est utilisée (<code>&lt;nom&gt;-fill.svg</code> : marqueurs, SOS, onglet actif).</p>
   <div class="grid" id="ui"></div>
 
   <h2>Marques</h2>
@@ -63,7 +62,7 @@
   // Keep in sync with icons/ (one <name>.svg each, plus <name>-fill.svg for the filled ones)
   const icons = "accessible add_location_alt arrow_back badge battery_full call check check_circle chevron_right circle close contacts dark_mode directions directions_bus directions_car directions_walk diversity_3 do_not_step download edit expand_more favorite front_hand gavel group groups home ios_share language layers light_mode location_on lock logout mail map mic more_horiz more_vert mosque my_location navigation notifications notifications_active person person_add photo_camera radio_button_checked record_voice_over report restaurant route schedule school search send share_location shield shield_person signal_cellular_alt sos storefront support_agent swap_vert turn_left verified_user visibility visibility_off volunteer_activism warning wifi woman".split(" ");
   const filled = new Set("call circle directions_walk do_not_step front_hand group home location_on map mosque notifications_active person record_voice_over restaurant send shield sos storefront visibility warning".split(" "));
-  const glyph = (file) => `<span class="glyph" style="--src:url('icons/${file}')"></span>`;
+  const glyph = (file) => `<span class="icon" style="--i:url(icons/${file})"></span>`;
   document.getElementById("ui").innerHTML = icons.map((n) => {
     const fill = filled.has(n);
     return `<figure><div>${glyph(n + ".svg")}${fill ? glyph(n + "-fill.svg") : ""}</div>` +

@@ -11,7 +11,7 @@ function applyTheme(theme) {
     el.classList.toggle("light", !dark);
   });
   toggle.setAttribute("aria-pressed", dark);
-  toggle.querySelector(".icon").textContent = dark ? "light_mode" : "dark_mode";
+  toggle.querySelector(".icon").style.setProperty("--i", `url(icons/${dark ? "light_mode" : "dark_mode"}.svg)`);
 }
 
 applyTheme(localStorage.getItem("sakina-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
