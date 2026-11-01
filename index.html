@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sakina · Maquettes des écrans</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body { margin: 0; font-family: Inter, sans-serif; background: #dcd5cc; color: var(--midnight); }
+  header { display: flex; align-items: center; gap: 24px; padding: 28px 48px; background: var(--midnight); color: var(--pearl); }
+  header img { height: 52px; }
+  header a { color: var(--gold-light); margin-left: auto; }
+  .grid { display: flex; flex-wrap: wrap; gap: 48px 40px; padding: 40px 48px 80px; }
+  figure { margin: 0; }
+  figcaption { margin-bottom: 12px; font: 600 15px/20px Inter, sans-serif; }
+  figcaption span { display: block; font-weight: 500; font-size: 12px; color: #5b6474; }
+
+  /* Device screen: 390 x 844 logical points (iPhone 14/15) */
+  .screen {
+    position: relative; width: 390px; height: 844px; overflow: hidden;
+    border-radius: 44px; box-shadow: 0 20px 50px rgb(20 32 78 / 0.25);
+    background: var(--surface); color: var(--on-surface); font-family: Inter, sans-serif;
+    display: flex; flex-direction: column;
+  }
+  .status { height: 54px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 6px 32px 0; font: 600 16px/1 Inter, sans-serif; position: relative; z-index: 5; }
+  .status .icons { display: flex; gap: 6px; }
+  .status .icon { font-size: 18px; }
+  .home-ind { position: absolute; bottom: 8px; left: 50%; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: var(--on-surface); opacity: .8; z-index: 9; }
+  .body { flex: 1; padding: 0 var(--s-lg); display: flex; flex-direction: column; min-height: 0; }
+  .appbar { height: 56px; display: flex; align-items: center; gap: var(--s-sm); flex: none; }
+  .iconbtn { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+  .iconbtn.filled { background: var(--surface-card); box-shadow: var(--shadow); }
+
+  /* Map layer */
+  .map { position: absolute; inset: 0; }
+  .map svg { width: 100%; height: 100%; display: block; }
+  .light .map { --m-land: #efe8de; --m-block: #e4dbcf; --m-road: #fbf8f3; --m-major: #ffffff; --m-water: #b9d6ee; --m-park: #d7e3c8; --m-label: #8a8f99; }
+  .dark .map { --m-land: #1c2a3d; --m-block: #223247; --m-road: #2d3f58; --m-major: #3a4f6c; --m-water: #16304f; --m-park: #1f3a36; --m-label: #7f8ea3; }
+  .pin { position: absolute; transform: translate(-50%, -100%); }
+  .me { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--sky); border: 4px solid #fff; box-shadow: 0 0 0 10px rgb(118 179 226 / 0.3); }
+
+  /* Floating bottom area: alert FAB above NavigationBar */
+  .bottom { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; }
+  .bottom .navbar { padding-bottom: 14px; height: 84px; }
+  .fab-sos { position: absolute; right: 20px; z-index: 7; }
+
+  /* Modal bottom sheet */
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; background: var(--surface); border-radius: 28px 28px 0 0; padding: 12px var(--s-lg) 34px; box-shadow: 0 -8px 30px rgb(20 32 78 / 0.18); }
+  .sheet .handle { width: 32px; height: 4px; border-radius: 2px; background: var(--outline); margin: 0 auto 16px; }
+  .scrim { position: absolute; inset: 0; background: rgb(20 32 78 / 0.35); z-index: 5; }
+
+  .stack { display: flex; flex-direction: column; gap: var(--s-md); }
+  .hstack { display: flex; align-items: center; gap: var(--s-sm); }
+  .grow { flex: 1; min-width: 0; }
+  .tile { display: flex; align-items: center; gap: var(--s-md); padding: 14px 0; }
+  .lead { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--primary-container); color: var(--on-primary-container); flex: none; }
+  .badge { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 10px; border-radius: 999px; font: 600 12px/1 Inter, sans-serif; }
+  .badge.ok { background: #dbe9df; color: var(--success); }
+  .badge.live { background: rgb(118 179 226 / 0.2); color: var(--sky); }
+  .dots { display: flex; gap: 8px; justify-content: center; }
+  .dots i { width: 8px; height: 8px; border-radius: 4px; background: var(--outline); }
+  .dots i.on { width: 24px; background: var(--primary); }
+  .photo { border-radius: var(--r-md); display: grid; place-items: center; color: rgb(255 255 255 / .9); flex: none; }
+  /* Onboarding progress (3 segments) */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; flex: none; }
+  .steps i { height: 4px; border-radius: 2px; background: var(--outline); }
+  .steps i.on { background: var(--primary); }
+  /* Checkbox */
+  .check { width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--outline); display: grid; place-items: center; flex: none; }
+  .check.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+</style>
+</head>
+<body>
+
+<!-- Stylised static map, reused by every map screen. Colors come from --m-* custom properties. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="map" viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice">
+    <rect width="390" height="844" style="fill:var(--m-land)"/>
+    <g style="fill:var(--m-block)">
+      <rect x="18" y="70" width="96" height="120" rx="6"/><rect x="140" y="64" width="110" height="88" rx="6"/><rect x="274" y="80" width="100" height="130" rx="6"/>
+      <rect x="20" y="226" width="110" height="140" rx="6"/><rect x="160" y="190" width="90" height="150" rx="6"/>
+      <rect x="290" y="250" width="90" height="120" rx="6"/><rect x="24" y="404" width="120" height="110" rx="6"/>
+      <rect x="170" y="380" width="100" height="120" rx="6"/><rect x="40" y="560" width="100" height="120" rx="6"/>
+      <rect x="290" y="560" width="90" height="140" rx="6"/><rect x="160" y="720" width="120" height="110" rx="6"/>
+    </g>
+    <path d="M286 400 h90 v130 h-110 z" style="fill:var(--m-park)"/>
+    <path d="M150 548 q40 -18 110 6 l16 140 q-60 20 -116 -6 z" style="fill:var(--m-park)"/>
+    <path d="M-10 720 C80 690 140 760 230 740 S360 690 400 700 L400 760 C340 760 300 800 230 800 S70 760 -10 780 Z" style="fill:var(--m-water)"/>
+    <g fill="none" stroke-linecap="round" style="stroke:var(--m-road)">
+      <path d="M0 210 L390 180" stroke-width="10"/><path d="M0 380 L390 380" stroke-width="10"/>
+      <path d="M0 540 L390 548" stroke-width="10"/><path d="M134 0 L150 844" stroke-width="10"/>
+      <path d="M270 0 L282 690" stroke-width="10"/><path d="M0 60 L390 60" stroke-width="7"/>
+      <path d="M60 210 L40 540" stroke-width="7"/><path d="M220 180 L215 380" stroke-width="7"/>
+      <path d="M150 700 L390 712" stroke-width="7"/>
+    </g>
+    <g fill="none" stroke-linecap="round" style="stroke:var(--m-major)">
+      <path d="M-10 300 C120 290 230 300 400 250" stroke-width="16"/>
+      <path d="M210 -10 C200 200 250 450 230 860" stroke-width="16"/>
+    </g>
+    <g font-family="Inter, sans-serif" font-size="10" font-weight="600" letter-spacing="1" style="fill:var(--m-label)">
+      <text x="24" y="294">BD BARBÈS</text><text x="300" y="374">RUE MYRHA</text>
+      <text x="40" y="534">RUE POLONCEAU</text><text x="300" y="470">SQUARE LÉON</text><text x="40" y="752">CANAL</text>
+    </g>
+  </symbol>
+</svg>
+
+<header>
+  <img src="../../assets/logos/svg/sakina-horizontal-blanc.svg" alt="Sakina">
+  <div><div class="title-l">Maquettes · MVP</div><div class="body-m" style="opacity:.75">17 écrans statiques · 390 × 844 · références pour l'implémentation Flutter</div></div>
+  <a href="design-system.html">Design system →</a>
+</header>
+
+<main class="grid">
+
+<!-- 01 Splash -->
+<figure><figcaption>01 · Splash<span>Thème sombre · logo vertical or</span></figcaption>
+<div class="screen dark" style="background:radial-gradient(circle at 50% 42%, #2c3f5c 0, var(--midnight) 60%, var(--navy) 100%)">
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="body" style="align-items:center;justify-content:center;gap:28px;padding-bottom:80px">
+    <img src="../../assets/logos/svg/sakina-vertical-or.svg" alt="Sakina" width="200">
+    <div class="title-m" style="color:var(--gold-light)">La sérénité, ensemble.</div>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 02 Login -->
+<figure><figcaption>02 · Connexion<span>Thème clair · refonte de lib/login</span></figcaption>
+<div class="screen light">
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="body" style="padding-bottom:42px">
+    <div style="display:flex;justify-content:center;margin:36px 0 28px"><img src="../../assets/logos/svg/sakina-vertical-bicolore.svg" alt="Sakina" width="130"></div>
+    <div class="headline-m" style="text-align:center">Bon retour parmi nous</div>
+    <div class="body-m muted" style="text-align:center;margin:6px 0 28px">La sérénité, ensemble.</div>
+    <div class="stack" style="gap:12px">
+      <div class="input"><span class="icon">mail</span>E-mail</div>
+      <div class="input"><span class="icon">lock</span><span class="grow">Mot de passe</span><span class="icon">visibility</span></div>
+      <div style="text-align:right"><button class="btn text" style="display:inline-flex">Mot de passe oublié ?</button></div>
+      <button class="btn block">Se connecter</button>
+      <div class="hstack body-s muted" style="margin:6px 0"><div class="divider grow"></div>ou<div class="divider grow"></div></div>
+      <button class="btn outline block"><img src="../../assets/images/apple.svg" alt="" width="20" style="filter:brightness(0)">Continuer avec Apple</button>
+      <button class="btn outline block"><img src="../../assets/images/google.svg" alt="" width="20">Continuer avec Google</button>
+    </div>
+    <div style="flex:1"></div>
+    <div class="body-m" style="text-align:center">Pas encore de compte ? <b style="color:var(--secondary)">S'inscrire</b></div>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+
+<!-- 03 Welcome -->
+<figure><figcaption>03 · Bienvenue<span>Thème clair · nouvel utilisateur, après la connexion</span></figcaption>
+<div class="screen light">
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="body" style="padding-bottom:42px">
+    <div class="appbar"><img src="../../assets/logos/svg/sakina-horizontal-bicolore.svg" alt="Sakina" height="30"></div>
+    <div style="margin:24px 0 32px;height:220px;border-radius:32px;background:linear-gradient(160deg,var(--midnight),var(--sapphire));display:grid;place-items:center;position:relative;overflow:hidden">
+      <img src="../../assets/logos/svg/sakina-symbole-bicolore.svg" alt="" width="120" style="opacity:.95">
+      <div style="position:absolute;left:28px;top:30px" class="marker halal"><span class="icon fill">restaurant</span></div>
+      <div style="position:absolute;right:36px;top:54px" class="marker place"><span class="icon fill">mosque</span></div>
+      <div style="position:absolute;right:70px;bottom:30px" class="avatar">A</div>
+    </div>
+    <div class="display-s">Bienvenue sur Sakina</div>
+    <div class="body-m muted" style="margin-top:8px">Se déplacer, être secouru, se sentir chez soi.</div>
+    <div class="stack" style="margin-top:24px;gap:18px">
+      <div class="hstack"><div class="lead"><span class="icon">route</span></div><div><div class="title-s">Se déplacer sereinement</div><div class="body-s muted">GPS, signalements et proches à vos côtés.</div></div></div>
+      <div class="hstack"><div class="lead"><span class="icon">volunteer_activism</span></div><div><div class="title-s">Ne jamais rester seul</div><div class="body-s muted">Une alerte prévient vos proches et la communauté.</div></div></div>
+      <div class="hstack"><div class="lead"><span class="icon">mosque</span></div><div><div class="title-s">Trouver ses lieux de confiance</div><div class="body-s muted">Mosquées, associations, commerces halal.</div></div></div>
+    </div>
+    <div style="flex:1"></div>
+    <div class="body-s muted" style="text-align:center;margin-bottom:12px">3 étapes · environ 1 minute</div>
+    <button class="btn block">Créer mon profil</button>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 04 Profile setup -->
+<figure><figcaption>04 · Votre profil · étape 1/3<span>Thème clair · informations de l'utilisateur</span></figcaption>
+<div class="screen light">
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="body" style="padding-bottom:42px">
+    <div class="appbar"><span class="icon">arrow_back</span><div class="grow"></div><span class="body-s muted">Étape 1 sur 3</span></div>
+    <div class="steps"><i class="on"></i><i></i><i></i></div>
+    <div class="headline-l" style="margin-top:24px">Faisons connaissance</div>
+    <div class="body-m muted" style="margin:8px 0 24px">Ces informations permettent à vos proches de vous reconnaître.</div>
+    <div class="hstack" style="margin-bottom:24px">
+      <div style="position:relative"><div class="avatar" style="width:72px;height:72px;background:var(--surface-card);color:var(--on-surface-muted);border:1.5px dashed var(--outline)"><span class="icon" style="font-size:32px">person</span></div>
+        <div class="avatar" style="position:absolute;right:-4px;bottom:-4px;width:30px;height:30px;background:var(--primary);color:var(--on-primary);border:2px solid var(--surface)"><span class="icon" style="font-size:16px">photo_camera</span></div></div>
+      <div><div class="title-s">Ajouter une photo</div><div class="body-s muted">Facultatif</div></div>
+    </div>
+    <div class="stack" style="gap:12px">
+      <div><div class="label-m muted" style="margin:0 0 6px 16px">Prénom</div><div class="input filled"><span class="icon muted">badge</span>Salma</div></div>
+      <div><div class="label-m muted" style="margin:0 0 6px 16px">Nom · facultatif</div><div class="input filled"><span class="icon muted">badge</span>Diallo</div></div>
+      <div><div class="label-m muted" style="margin:0 0 6px 16px">Téléphone</div><div class="input filled"><span class="title-s">🇫🇷 +33</span><span class="icon muted" style="font-size:18px;margin-left:-8px">expand_more</span>6 12 34 56 78</div>
+        <div class="body-s muted" style="margin:6px 16px 0">Vos proches vous trouvent grâce à ce numéro. Il n'est jamais visible par la communauté.</div></div>
+    </div>
+    <div class="card hstack" style="margin-top:16px;padding:12px"><span class="icon muted">mail</span><div class="grow body-s">salma.d@exemple.fr</div><span class="body-s muted">via Google</span></div>
+    <div style="flex:1"></div>
+    <button class="btn block">Continuer</button>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 05 Consents -->
+<figure><figcaption>05 · Vos données · étape 2/3<span>Thème clair · RGPD : consentement explicite et séparé</span></figcaption>
+<div class="screen light">
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="body" style="padding-bottom:42px">
+    <div class="appbar"><span class="icon">arrow_back</span><div class="grow"></div><span class="body-s muted">Étape 2 sur 3</span></div>
+    <div class="steps"><i class="on"></i><i class="on"></i><i></i></div>
+    <div class="headline-l" style="margin-top:24px">Vos données restent les vôtres</div>
+    <div class="body-m muted" style="margin:8px 0 20px">Choisissez ce que vous autorisez. Vous pourrez changer d'avis à tout moment dans votre profil.</div>
+    <div class="card" style="padding:0 16px">
+      <div class="tile" style="align-items:flex-start"><div class="lead"><span class="icon">my_location</span></div><div class="grow"><div class="title-s">Position</div><div class="body-s muted">GPS, lieux proches, alertes. Partagée avec vos proches <b>uniquement pendant un trajet</b>.</div></div><div class="switch on"></div></div>
+      <div class="divider"></div>
+      <div class="tile" style="align-items:flex-start"><div class="lead"><span class="icon">contacts</span></div><div class="grow"><div class="title-s">Contacts</div><div class="body-s muted">Pour choisir vos proches. Votre répertoire n'est jamais envoyé à Sakina.</div></div><div class="switch on"></div></div>
+      <div class="divider"></div>
+      <div class="tile" style="align-items:flex-start"><div class="lead"><span class="icon">notifications</span></div><div class="grow"><div class="title-s">Notifications</div><div class="body-s muted">Pour recevoir les alertes de vos proches et de la communauté.</div></div><div class="switch on"></div></div>
+    </div>
+    <div class="stack" style="gap:14px;margin-top:20px">
+      <div class="hstack" style="align-items:flex-start"><span class="check on"><span class="icon" style="font-size:16px">check</span></span><div class="body-s">J'ai 15 ans ou plus.</div></div>
+      <div class="hstack" style="align-items:flex-start"><span class="check on"><span class="icon" style="font-size:16px">check</span></span><div class="body-s">J'accepte les <u>conditions d'utilisation</u> et j'ai lu la <u>politique de confidentialité</u>.</div></div>
+      <div class="hstack" style="align-items:flex-start"><span class="check"></span><div class="body-s muted">Recevoir des nouvelles de Sakina et de ses partenaires. Facultatif.</div></div>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn block">Continuer</button>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 06 First trusted contacts -->
+<figure><figcaption>06 · Vos proches · étape 3/3<span>Thème clair · premiers contacts de confiance</span></figcaption>
+<div class="screen light">
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="body" style="padding-bottom:42px">
+    <div class="appbar"><span class="icon">arrow_back</span><div class="grow"></div><span class="body-s muted">Étape 3 sur 3</span></div>
+    <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+    <div class="headline-l" style="margin-top:24px">Qui prévenir en cas de besoin ?</div>
+    <div class="body-m muted" style="margin:8px 0 20px">Ils reçoivent une invitation par SMS et ne sont prévenus que si vous signalez, alertez ou partagez un trajet.</div>
+    <div class="input"><span class="icon">search</span>Rechercher dans vos contacts</div>
+    <div class="stack" style="gap:0;margin-top:8px">
+      <div class="tile"><div class="avatar">A</div><div class="grow"><div class="title-s">Amina B.</div><div class="body-s muted">+33 6 •• •• •• 12</div></div><span class="check on"><span class="icon" style="font-size:16px">check</span></span></div>
+      <div class="divider"></div>
+      <div class="tile"><div class="avatar" style="background:var(--gold);color:var(--navy)">Y</div><div class="grow"><div class="title-s">Youssef K.</div><div class="body-s muted">+33 6 •• •• •• 47</div></div><span class="check on"><span class="icon" style="font-size:16px">check</span></span></div>
+      <div class="divider"></div>
+      <div class="tile"><div class="avatar" style="background:var(--sky);color:var(--navy)">F</div><div class="grow"><div class="title-s">Fatou D.</div><div class="body-s muted">+33 7 •• •• •• 03</div></div><span class="check"></span></div>
+      <div class="divider"></div>
+      <div class="tile"><div class="avatar" style="background:var(--pearl);color:var(--navy);border:1px solid var(--outline)">I</div><div class="grow"><div class="title-s">Ibrahim S.</div><div class="body-s muted">+32 4 •• •• •• 88</div></div><span class="check"></span></div>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn block">Inviter 2 proches</button>
+    <button class="btn text block" style="margin-top:8px">Plus tard</button>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 07 Map home -->
+<figure><figcaption>07 · Carte (accueil)<span>Thème clair · onglet Carte + bouton d'alerte</span></figcaption>
+<div class="screen light">
+  <div class="map"><svg><use href="#map"/></svg></div>
+  <div class="pin" style="left:98px;top:250px"><div class="marker place"><span class="icon fill">mosque</span></div></div>
+  <div class="pin" style="left:300px;top:230px"><div class="marker halal"><span class="icon fill">restaurant</span></div></div>
+  <div class="pin" style="left:330px;top:400px"><div class="marker report"><span class="icon fill">do_not_step</span></div></div>
+  <div class="pin" style="left:90px;top:470px"><div class="marker halal"><span class="icon fill">storefront</span></div></div>
+  <div class="me" style="left:200px;top:440px"></div>
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div style="position:relative;z-index:4;padding:4px 16px 0" class="stack">
+    <div class="hstack">
+      <div class="input grow" style="box-shadow:var(--shadow);border:0"><span class="icon">search</span>Où allez-vous ?</div>
+      <div class="avatar" style="width:48px;height:48px;box-shadow:var(--shadow)">S</div>
+    </div>
+    <div class="hstack" style="gap:8px;overflow:hidden">
+      <span class="chip selected" style="box-shadow:var(--shadow)"><span class="icon">layers</span>Tout</span>
+      <span class="chip" style="box-shadow:var(--shadow)"><span class="icon">mosque</span>Mosquées</span>
+      <span class="chip" style="box-shadow:var(--shadow)"><span class="icon">restaurant</span>Halal</span>
+      <span class="chip" style="box-shadow:var(--shadow)"><span class="icon">report</span>Signalements</span>
+    </div>
+  </div>
+  <div class="iconbtn filled" style="position:absolute;right:28px;bottom:296px;z-index:4;background:var(--surface-card)"><span class="icon">my_location</span></div>
+  <div class="card" style="position:absolute;left:16px;right:16px;bottom:100px;z-index:4;box-shadow:var(--shadow)">
+    <div class="hstack">
+      <div class="lead"><span class="icon">home</span></div>
+      <div class="grow"><div class="title-s">Rentrer à la maison</div><div class="body-s muted">18 min à pied · 1,4 km</div></div>
+      <button class="btn" style="height:40px;padding:0 16px;font-size:14px">Y aller</button>
+    </div>
+  </div>
+  <div class="fab-sos" style="bottom:190px"><div class="sos"><span class="icon fill">sos</span></div></div>
+  <div class="bottom"><nav class="navbar">
+    <div class="item active"><div class="pill"><span class="icon">map</span></div><span class="label-m">Carte</span></div>
+    <div class="item"><div class="pill"><span class="icon">mosque</span></div><span class="label-m">Lieux</span></div>
+    <div class="item"><div class="pill"><span class="icon">group</span></div><span class="label-m">Proches</span></div>
+    <div class="item"><div class="pill"><span class="icon">person</span></div><span class="label-m">Profil</span></div>
+  </nav></div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 08 Route planning -->
+<figure><figcaption>08 · Itinéraire<span>Thème clair · destination, tracé, partage aux proches</span></figcaption>
+<div class="screen light">
+  <div class="map"><svg><use href="#map"/></svg></div>
+  <svg style="position:absolute;inset:0;z-index:1" viewBox="0 0 390 844"><path d="M200 440 L218 380 L222 300 L150 296 L140 210" fill="none" stroke="#294f8d" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="me" style="left:200px;top:440px;z-index:2"></div>
+  <div class="pin" style="left:140px;top:214px;z-index:2"><div class="marker halal" style="background:var(--navy)"><span class="icon fill">home</span></div></div>
+  <div class="pin" style="left:330px;top:400px"><div class="marker report"><span class="icon fill">do_not_step</span></div></div>
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="card" style="position:relative;z-index:4;margin:4px 16px 0;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center">
+    <span class="icon">arrow_back</span>
+    <div class="grow stack" style="gap:8px">
+      <div class="hstack body-m"><span class="icon" style="font-size:18px;color:var(--sky)">radio_button_checked</span>Ma position</div>
+      <div class="divider"></div>
+      <div class="hstack body-m"><span class="icon fill" style="font-size:18px;color:var(--navy)">location_on</span>Maison · 12 rue Polonceau</div>
+    </div>
+    <span class="icon muted">swap_vert</span>
+  </div>
+  <div class="sheet stack" style="gap:14px">
+    <div class="handle" style="margin-bottom:0"></div>
+    <div class="hstack"><div class="grow"><div class="headline-m">18 min</div><div class="body-m muted">1,4 km · arrivée 21:47</div></div>
+      <div class="hstack" style="gap:6px"><span class="chip selected"><span class="icon">directions_walk</span></span><span class="chip"><span class="icon">directions_bus</span></span><span class="chip"><span class="icon">directions_car</span></span></div></div>
+    <div class="card hstack" style="background:#f6ead2;padding:12px"><span class="icon fill" style="color:#8a6420">do_not_step</span><div class="body-s grow">1 signalement près du trajet : « zone à éviter », rue Myrha, il y a 40 min.</div></div>
+    <div class="hstack"><div class="hstack grow" style="gap:0"><div class="avatar" style="border:2px solid var(--surface)">A</div><div class="avatar" style="margin-left:-10px;border:2px solid var(--surface);background:var(--gold)">Y</div><div class="body-m" style="margin-left:10px">Partager avec Amina et Youssef</div></div><div class="switch on"></div></div>
+    <button class="btn block"><span class="icon">navigation</span>Démarrer le trajet</button>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 09 Active trip -->
+<figure><figcaption>09 · Trajet en cours<span>Thème sombre · position partagée jusqu'à l'arrivée</span></figcaption>
+<div class="screen dark">
+  <div class="map"><svg><use href="#map"/></svg></div>
+  <svg style="position:absolute;inset:0;z-index:1" viewBox="0 0 390 844"><path d="M218 380 L222 300 L150 296 L140 210" fill="none" stroke="#fce5a2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M200 440 L218 380" fill="none" stroke="#fce5a2" stroke-opacity=".3" stroke-width="7" stroke-linecap="round"/></svg>
+  <div class="me" style="left:218px;top:382px;z-index:2"></div>
+  <div class="pin" style="left:140px;top:214px;z-index:2"><div class="marker halal"><span class="icon fill">home</span></div></div>
+  <div class="status"><span>21:35</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="card hstack" style="position:relative;z-index:4;margin:4px 16px 0;background:var(--navy);gap:16px;padding:18px">
+    <span class="icon" style="font-size:36px;color:var(--gold-light)">turn_left</span>
+    <div><div class="headline-s">Dans 120 m</div><div class="body-m muted">Tournez à gauche · bd Barbès</div></div>
+  </div>
+  <div class="fab-sos" style="bottom:300px"><div class="sos"><span class="icon fill">sos</span></div></div>
+  <div class="sheet stack" style="gap:14px">
+    <div class="handle" style="margin-bottom:0"></div>
+    <div class="hstack"><div class="grow"><div class="headline-m">12 min</div><div class="body-m muted">900 m · arrivée 21:47</div></div><span class="badge live"><span class="icon fill" style="font-size:14px">circle</span>En direct</span></div>
+    <div class="card hstack"><div class="hstack" style="gap:0"><div class="avatar">A</div><div class="avatar" style="margin-left:-10px;background:var(--gold);color:var(--navy)">Y</div></div><div class="grow"><div class="title-s">Amina et Youssef vous suivent</div><div class="body-s muted">Le partage s'arrête automatiquement à l'arrivée.</div></div></div>
+    <div class="hstack"><button class="btn tonal grow" style="height:48px"><span class="icon">add_location_alt</span>Signaler</button><button class="btn outline grow" style="height:48px">Arrêter le trajet</button></div>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 10 Report sheet -->
+<figure><figcaption>10 · Signaler un incident<span>Thème clair · volet du bas, 2 gestes</span></figcaption>
+<div class="screen light">
+  <div class="map"><svg><use href="#map"/></svg></div>
+  <div class="me" style="left:200px;top:300px"></div>
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="scrim"></div>
+  <div class="sheet stack" style="gap:18px">
+    <div class="handle" style="margin-bottom:0"></div>
+    <div><div class="headline-m">Que se passe-t-il ?</div><div class="hstack body-s muted" style="gap:4px;margin-top:6px"><span class="icon" style="font-size:16px">location_on</span>Rue Myrha, Paris 18e · maintenant</div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div class="card stack" style="align-items:center;gap:8px;padding:14px 6px;text-align:center;border:1.5px solid var(--alert)"><span class="icon fill" style="color:var(--alert);font-size:30px">front_hand</span><span class="label-m">Agression</span></div>
+      <div class="card stack" style="align-items:center;gap:8px;padding:14px 6px;text-align:center"><span class="icon fill" style="color:#8a6420;font-size:30px">record_voice_over</span><span class="label-m">Insulte ou menace</span></div>
+      <div class="card stack" style="align-items:center;gap:8px;padding:14px 6px;text-align:center"><span class="icon fill" style="color:#8a6420;font-size:30px">directions_walk</span><span class="label-m">Suivi</span></div>
+      <div class="card stack" style="align-items:center;gap:8px;padding:14px 6px;text-align:center"><span class="icon fill" style="color:#8a6420;font-size:30px">mosque</span><span class="label-m">Lieu de culte dégradé</span></div>
+      <div class="card stack" style="align-items:center;gap:8px;padding:14px 6px;text-align:center"><span class="icon fill" style="color:var(--sapphire);font-size:30px">do_not_step</span><span class="label-m">Zone à éviter</span></div>
+      <div class="card stack" style="align-items:center;gap:8px;padding:14px 6px;text-align:center"><span class="icon muted" style="font-size:30px">more_horiz</span><span class="label-m">Autre</span></div>
+    </div>
+    <div class="card hstack" style="padding:12px"><span class="icon" style="color:var(--sapphire)">verified_user</span><div class="body-s">Publié de façon anonyme dès que vous touchez une catégorie. Vos proches sont prévenus.</div></div>
+    <div class="body-s" style="text-align:center;color:var(--alert)"><b>Danger immédiat ?</b> Maintenez le bouton SOS ou appelez le 17.</div>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 11 Alert countdown -->
+<figure><figcaption>11 · Alerte : compte à rebours<span>Thème sombre · après appui long 2 s · annulable 5 s</span></figcaption>
+<div class="screen dark" style="background:radial-gradient(circle at 50% 40%, #5a2f35 0, var(--midnight) 55%, var(--navy) 100%)">
+  <div class="status"><span>21:38</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="body" style="align-items:center;text-align:center;padding-bottom:42px">
+    <div class="title-m" style="margin-top:48px">Envoi de l'alerte dans</div>
+    <div style="margin:36px 0;width:200px;height:200px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--alert) 0 80%, rgb(255 255 255 / .12) 80% 100%)">
+      <div style="width:176px;height:176px;border-radius:50%;background:var(--midnight);display:grid;place-items:center"><span style="font:700 88px/1 Inter,sans-serif">4</span></div>
+    </div>
+    <div class="stack card" style="width:100%;text-align:left;gap:12px">
+      <div class="hstack"><span class="icon" style="color:var(--gold-light)">group</span><div class="body-m">Vos 2 proches, avec votre position</div></div>
+      <div class="hstack"><span class="icon" style="color:var(--gold-light)">diversity_3</span><div class="body-m">Les 50 membres les plus proches</div></div>
+      <div class="hstack"><span class="icon" style="color:var(--gold-light)">mic</span><div class="body-m muted">Enregistrement audio · bientôt</div></div>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn alert block" style="margin-bottom:12px"><span class="icon fill">send</span>Envoyer maintenant</button>
+    <button class="btn outline block" style="height:60px;font-size:18px">Annuler</button>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 12 Alert sent -->
+<figure><figcaption>12 · Alerte envoyée<span>Thème sombre · côté personne en difficulté</span></figcaption>
+<div class="screen dark">
+  <div class="status"><span>21:38</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="body" style="padding-bottom:42px">
+    <div class="hstack" style="margin-top:16px"><span class="badge" style="background:var(--alert);color:#fff"><span class="icon fill" style="font-size:14px">sos</span>Alerte active</span><span class="grow"></span><span class="body-s muted">depuis 1 min</span></div>
+    <div class="display-s" style="margin-top:16px">3 personnes arrivent</div>
+    <div class="body-m muted" style="margin:6px 0 20px">Restez dans un endroit éclairé et fréquenté si vous le pouvez.</div>
+    <div class="card stack" style="gap:0;padding:4px 16px">
+      <div class="tile"><div class="avatar" style="background:var(--gold-light);color:var(--navy)">K</div><div class="grow"><div class="title-s">Karim</div><div class="body-s muted">Membre à 300 m</div></div><span class="title-s" style="color:var(--gold-light)">3 min</span></div>
+      <div class="divider"></div>
+      <div class="tile"><div class="avatar" style="background:var(--gold-light);color:var(--navy)">S</div><div class="grow"><div class="title-s">Sarah</div><div class="body-s muted">Membre à 650 m</div></div><span class="title-s" style="color:var(--gold-light)">7 min</span></div>
+      <div class="divider"></div>
+      <div class="tile"><div class="avatar">A</div><div class="grow"><div class="title-s">Amina · proche</div><div class="body-s muted">Suit votre position</div></div><span class="icon" style="color:var(--sky)">share_location</span></div>
+    </div>
+    <div class="card hstack" style="margin-top:12px;background:var(--navy)"><span class="icon" style="color:var(--sky)">support_agent</span><div class="grow body-s">Besoin d'être accompagné ensuite ? Le soutien juridique arrive bientôt.</div></div>
+    <div style="flex:1"></div>
+    <div class="stack" style="gap:12px">
+      <button class="btn alert block"><span class="icon fill">call</span>Appeler le 17</button>
+      <button class="btn block"><span class="icon">check_circle</span>Je suis en sécurité</button>
+    </div>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 13 Alert received -->
+<figure><figcaption>13 · Alerte reçue<span>Thème sombre · côté membre à proximité</span></figcaption>
+<div class="screen dark">
+  <div class="map" style="height:360px;bottom:auto"><svg><use href="#map"/></svg></div>
+  <div style="position:absolute;left:0;right:0;top:250px;height:110px;background:linear-gradient(transparent,var(--midnight));z-index:1"></div>
+  <div class="pin" style="left:300px;top:200px;z-index:2"><div class="marker severe"><span class="icon fill">sos</span></div></div>
+  <div class="me" style="left:110px;top:300px;z-index:2"></div>
+  <div class="status"><span>21:38</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="appbar" style="position:relative;z-index:3;padding:0 16px"><div class="iconbtn filled"><span class="icon">close</span></div></div>
+  <div class="body" style="margin-top:250px;position:relative;z-index:3;padding-bottom:42px">
+    <span class="badge" style="background:var(--alert);color:#fff;align-self:flex-start"><span class="icon fill" style="font-size:14px">sos</span>Alerte à 350 m</span>
+    <div class="headline-l" style="margin-top:12px">Quelqu'un a besoin d'aide</div>
+    <div class="body-m muted" style="margin-top:4px">Rue Myrha, Paris 18e · il y a 1 min · 2 personnes en route</div>
+    <div class="card hstack" style="margin-top:20px;background:var(--alert-soft);color:var(--navy);align-items:flex-start"><span class="icon fill" style="color:var(--alert)">shield</span><div class="body-s"><b>Ne vous mettez jamais en danger.</b> Si la situation est violente, appelez le 17 ou le 112. Votre présence suffit souvent.</div></div>
+    <div style="flex:1"></div>
+    <div class="stack" style="gap:12px">
+      <button class="btn block"><span class="icon">directions_walk</span>J'y vais · 4 min</button>
+      <div class="hstack"><button class="btn outline grow" style="height:48px"><span class="icon">call</span>Appeler le 17</button><button class="btn outline grow" style="height:48px">Je ne peux pas</button></div>
+    </div>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 14 Places list -->
+<figure><figcaption>14 · Lieux de confiance<span>Thème clair · onglet Lieux (Halal places)</span></figcaption>
+<div class="screen light">
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="body" style="padding:0">
+    <div style="padding:8px 24px 0" class="stack">
+      <div class="hstack"><div class="headline-l grow">Lieux</div><div class="iconbtn"><span class="icon">map</span></div></div>
+      <div class="input"><span class="icon">search</span>Mosquée, boucherie, association…</div>
+    </div>
+    <div class="hstack" style="gap:8px;padding:14px 24px;overflow:hidden">
+      <span class="chip selected"><span class="icon">mosque</span>Mosquées</span><span class="chip"><span class="icon">restaurant</span>Restaurants</span><span class="chip"><span class="icon">storefront</span>Boucheries</span><span class="chip"><span class="icon">groups</span>Associations</span>
+    </div>
+    <div class="stack" style="padding:0 24px;gap:12px">
+      <div class="body-s muted">4 lieux à moins de 1 km</div>
+      <div class="card hstack" style="padding:12px"><div class="photo" style="width:72px;height:72px;background:linear-gradient(135deg,var(--sapphire),var(--midnight))"><span class="icon fill" style="font-size:32px">mosque</span></div><div class="grow"><div class="title-s">Mosquée Al-Nour</div><div class="body-s muted">Mosquée · 350 m</div><div class="hstack" style="gap:6px;margin-top:6px"><span class="badge ok">Ouvert</span><span class="body-s muted">Accès femmes</span></div></div><span class="icon muted">chevron_right</span></div>
+      <div class="card hstack" style="padding:12px"><div class="photo" style="width:72px;height:72px;background:linear-gradient(135deg,var(--sky),var(--sapphire))"><span class="icon fill" style="font-size:32px">mosque</span></div><div class="grow"><div class="title-s">Mosquée de la Goutte</div><div class="body-s muted">Mosquée · 600 m</div><div class="hstack" style="gap:6px;margin-top:6px"><span class="badge ok">Ouvert</span></div></div><span class="icon muted">chevron_right</span></div>
+      <div class="card hstack" style="padding:12px"><div class="photo" style="width:72px;height:72px;background:linear-gradient(135deg,var(--gold),#8a6420)"><span class="icon fill" style="font-size:32px">restaurant</span></div><div class="grow"><div class="title-s">Le Jasmin</div><div class="body-s muted">Restaurant · 450 m</div><div class="hstack" style="gap:6px;margin-top:6px"><span class="badge ok">Ouvert</span><span class="body-s muted">Ferme à 23 h</span></div></div><span class="icon muted">chevron_right</span></div>
+      <div class="card hstack" style="padding:12px"><div class="photo" style="width:72px;height:72px;background:linear-gradient(135deg,var(--gold-light),var(--gold))"><span class="icon fill" style="font-size:32px">storefront</span></div><div class="grow"><div class="title-s">Boucherie du Marché</div><div class="body-s muted">Boucherie · 800 m</div><div class="hstack" style="gap:6px;margin-top:6px"><span class="badge" style="background:#efe3d3;color:#8a6420">Fermé</span><span class="body-s muted">Ouvre à 8 h</span></div></div><span class="icon muted">chevron_right</span></div>
+    </div>
+  </div>
+  <div class="fab-sos" style="bottom:calc(84px + var(--s-md))"><div class="sos"><span class="icon fill">sos</span></div></div>
+  <div class="bottom"><nav class="navbar">
+    <div class="item"><div class="pill"><span class="icon">map</span></div><span class="label-m">Carte</span></div>
+    <div class="item active"><div class="pill"><span class="icon">mosque</span></div><span class="label-m">Lieux</span></div>
+    <div class="item"><div class="pill"><span class="icon">group</span></div><span class="label-m">Proches</span></div>
+    <div class="item"><div class="pill"><span class="icon">person</span></div><span class="label-m">Profil</span></div>
+  </nav></div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 15 Place detail -->
+<figure><figcaption>15 · Fiche d'un lieu<span>Thème clair · détail et itinéraire</span></figcaption>
+<div class="screen light">
+  <div style="position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(160deg,var(--sapphire),var(--midnight));display:grid;place-items:center"><span class="icon fill" style="font-size:96px;color:rgb(252 229 162 / .85)">mosque</span></div>
+  <div class="status dark" style="color:var(--pearl)"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="hstack" style="position:relative;z-index:3;padding:4px 16px;justify-content:space-between"><div class="iconbtn filled"><span class="icon">arrow_back</span></div><div class="hstack"><div class="iconbtn filled"><span class="icon">favorite</span></div><div class="iconbtn filled"><span class="icon">ios_share</span></div></div></div>
+  <div class="body" style="position:relative;z-index:3;margin-top:150px;background:var(--surface);border-radius:28px 28px 0 0;padding-top:24px;padding-bottom:42px">
+    <div class="hstack"><div class="grow"><div class="headline-l">Mosquée Al-Nour</div><div class="body-m muted">Mosquée · Paris 18e</div></div><span class="badge ok">Ouvert</span></div>
+    <div class="hstack" style="margin:20px 0;gap:12px">
+      <button class="btn grow" style="height:48px"><span class="icon">directions</span>Itinéraire</button>
+      <button class="btn tonal" style="height:48px;width:56px;padding:0"><span class="icon">call</span></button>
+      <button class="btn tonal" style="height:48px;width:56px;padding:0"><span class="icon">language</span></button>
+    </div>
+    <div class="card stack" style="gap:0;padding:0 16px">
+      <div class="tile"><span class="icon muted">location_on</span><div class="grow body-m">14 rue Polonceau, 75018 Paris</div><span class="body-s muted">350 m</span></div>
+      <div class="divider"></div>
+      <div class="tile"><span class="icon muted">schedule</span><div class="grow body-m">Tous les jours · 5 h 30 – 23 h</div><span class="icon muted">expand_more</span></div>
+      <div class="divider"></div>
+      <div class="tile"><span class="icon muted">call</span><div class="grow body-m">01 23 45 67 89</div></div>
+    </div>
+    <div class="title-s" style="margin:20px 0 10px">Sur place</div>
+    <div class="hstack" style="gap:8px;flex-wrap:wrap">
+      <span class="chip"><span class="icon">woman</span>Salle femmes</span><span class="chip"><span class="icon">accessible</span>Accès PMR</span><span class="chip"><span class="icon">school</span>Cours</span>
+    </div>
+  </div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 16 Trusted contacts -->
+<figure><figcaption>16 · Proches<span>Thème clair · contacts de confiance et suivi</span></figcaption>
+<div class="screen light">
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="body">
+    <div class="headline-l" style="margin-top:8px">Proches</div>
+    <div class="body-m muted" style="margin:6px 0 20px">Ils sont prévenus quand vous signalez, alertez ou partagez un trajet.</div>
+    <div class="card stack" style="background:var(--midnight);color:var(--pearl);gap:12px">
+      <div class="hstack"><div class="avatar" style="background:var(--gold-light);color:var(--navy)">Y</div><div class="grow"><div class="title-s">Youssef est en trajet</div><div class="body-s" style="opacity:.75">Arrivée prévue 21:47 · 900 m restants</div></div><span class="badge live"><span class="icon fill" style="font-size:12px">circle</span>En direct</span></div>
+      <button class="btn block" style="height:44px;font-size:14px;background:var(--gold-light)">Voir sur la carte</button>
+    </div>
+    <div class="hstack" style="margin:24px 0 4px"><div class="title-s grow">Contacts de confiance · 2 / 5</div></div>
+    <div class="stack" style="gap:0">
+      <div class="tile"><div class="avatar">A</div><div class="grow"><div class="title-s">Amina B.</div><div class="body-s muted">Sœur · +33 6 •• •• •• 12</div></div><span class="icon muted">more_vert</span></div>
+      <div class="divider"></div>
+      <div class="tile"><div class="avatar" style="background:var(--gold);color:var(--navy)">Y</div><div class="grow"><div class="title-s">Youssef K.</div><div class="body-s muted">Frère · +33 6 •• •• •• 47</div></div><span class="icon muted">more_vert</span></div>
+      <div class="divider"></div>
+      <div class="tile"><div class="avatar" style="background:transparent;border:1.5px dashed var(--outline);color:var(--on-surface-muted)"><span class="icon">schedule</span></div><div class="grow"><div class="title-s">Fatou D.</div><div class="body-s muted">Invitation envoyée · en attente</div></div><button class="btn text" style="font-size:14px">Relancer</button></div>
+    </div>
+    <button class="btn tonal block" style="margin-top:16px"><span class="icon">person_add</span>Ajouter depuis le répertoire</button>
+  </div>
+  <div class="fab-sos" style="bottom:calc(84px + var(--s-md))"><div class="sos"><span class="icon fill">sos</span></div></div>
+  <div class="bottom"><nav class="navbar">
+    <div class="item"><div class="pill"><span class="icon">map</span></div><span class="label-m">Carte</span></div>
+    <div class="item"><div class="pill"><span class="icon">mosque</span></div><span class="label-m">Lieux</span></div>
+    <div class="item active"><div class="pill"><span class="icon">group</span></div><span class="label-m">Proches</span></div>
+    <div class="item"><div class="pill"><span class="icon">person</span></div><span class="label-m">Profil</span></div>
+  </nav></div>
+  <div class="home-ind"></div>
+</div></figure>
+
+<!-- 17 Profile -->
+<figure><figcaption>17 · Profil et confidentialité<span>Thème clair · réglages et données</span></figcaption>
+<div class="screen light">
+  <div class="status"><span>9:41</span><span class="icons"><span class="icon">signal_cellular_alt</span><span class="icon">wifi</span><span class="icon">battery_full</span></span></div>
+  <div class="body">
+    <div class="hstack" style="margin:8px 0 20px"><div class="avatar" style="width:64px;height:64px;font-size:24px">S</div><div class="grow"><div class="headline-s">Salma Diallo</div><div class="body-s muted">salma.d@exemple.fr</div></div><span class="icon muted">edit</span></div>
+    <div class="label-m muted" style="margin-bottom:4px">CONFIDENTIALITÉ</div>
+    <div class="card" style="padding:0 16px">
+      <div class="tile"><span class="icon muted">share_location</span><div class="grow"><div class="title-s">Partage de position</div><div class="body-s muted">Uniquement pendant un trajet</div></div><div class="switch on"></div></div>
+      <div class="divider"></div>
+      <div class="tile"><span class="icon muted">notifications_active</span><div class="grow"><div class="title-s">Alertes de proximité</div><div class="body-s muted">Être prévenue si quelqu'un a besoin d'aide</div></div><div class="switch on"></div></div>
+      <div class="divider"></div>
+      <div class="tile"><span class="icon muted">visibility_off</span><div class="grow"><div class="title-s">Signalements anonymes</div><div class="body-s muted">Votre nom n'est jamais affiché</div></div><div class="switch on"></div></div>
+    </div>
+    <div class="label-m muted" style="margin:18px 0 4px">MES DONNÉES</div>
+    <div class="card" style="padding:0 16px">
+      <div class="tile" style="padding:12px 0"><span class="icon muted">download</span><div class="grow title-s">Télécharger mes données</div><span class="icon muted">chevron_right</span></div>
+      <div class="divider"></div>
+      <div class="tile" style="padding:12px 0"><span class="icon muted">gavel</span><div class="grow title-s">Être accompagné juridiquement</div><span class="badge" style="background:var(--primary-container);color:var(--navy)">Bientôt</span></div>
+    </div>
+    <button class="btn text" style="margin-top:12px;align-self:flex-start"><span class="icon">logout</span>Se déconnecter</button>
+  </div>
+  <div class="fab-sos" style="bottom:calc(84px + var(--s-md))"><div class="sos"><span class="icon fill">sos</span></div></div>
+  <div class="bottom"><nav class="navbar">
+    <div class="item"><div class="pill"><span class="icon">map</span></div><span class="label-m">Carte</span></div>
+    <div class="item"><div class="pill"><span class="icon">mosque</span></div><span class="label-m">Lieux</span></div>
+    <div class="item"><div class="pill"><span class="icon">group</span></div><span class="label-m">Proches</span></div>
+    <div class="item active"><div class="pill"><span class="icon">person</span></div><span class="label-m">Profil</span></div>
+  </nav></div>
+  <div class="home-ind"></div>
+</div></figure>
+
+</main>
+</body>
+</html>
