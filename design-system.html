@@ -134,15 +134,18 @@
   </div>
 
   <h2>Messagerie et assistant</h2>
-  <p>Conversation d'alerte et Assistant Sakina. Les messages de l'assistant sont pleine largeur et cerclés, pour ne jamais être confondus avec une personne. Le bouton IA se place en haut à droite des onglets, jamais près du bouton d'alerte.</p>
+  <p>IA d’accompagnement intégrée à la carte, conversation complète à la demande. Les messages de l’assistant sont pleine largeur et cerclés, pour ne jamais être confondus avec une personne. Le marqueur IA reste sobre, distinct du SOS.</p>
   <div class="panel light" data-auto-theme>
     <div style="display:flex;gap:12px;align-items:center"><div data-component="ai-btn"></div><div class="note">IconButton.filled · ouvre l'assistant</div></div>
     <div class="bubble"><span class="from">Karim · membre à 300 m</span>J'arrive par la rue Myrha, veste bleue.</div>
     <div class="note">Bulle reçue (prénom et rôle uniquement)</div>
     <div class="bubble mine">Je suis devant la pharmacie, à l'angle.</div>
     <div class="note">Bulle envoyée</div>
-    <div data-component="ai-msg"><span slot="message">Karim arrive dans 3 min. Si la situation devient violente, appelez le 17.</span><div slot="actions"><button class="btn alert"><span class="icon fill" style="--i:url(icons/call-fill.svg)"></span>Appeler le 17</button><button class="btn outline"><span class="icon" style="--i:url(icons/gavel.svg)"></span>Soutien juridique</button></div></div>
-    <div class="note">Message de l'assistant avec actions</div>
+    <div data-component="ai-msg"><span slot="message">Le boulevard est mieux éclairé. Vous pouvez garder ce trajet.<br><span class="body-s muted">Mairie · 20:00</span></span><div slot="actions"><button class="btn outline" style="height:44px">Plus éclairé</button><button class="btn outline" style="height:44px">Plus rapide</button></div></div>
+    <div class="note">Conseil IA : une phrase, puis la source et l’heure. Les actions sensibles (appel, partage, SOS) restent des gestes de la personne.</div>
+    <div class="note">Incertitude : l’IA dit qu’elle ne sait pas et présente les options sans préférence (écran 08b).</div>
+    <button class="btn outline" aria-label="Appuyer pour parler à l’assistant" style="height:48px;width:48px;padding:0"><span class="icon" style="--i:url(icons/mic.svg)"></span></button>
+    <div class="note">Voix sur appui uniquement, jamais d’écoute permanente.</div>
     <div data-component="composer" data-placeholder="Écrire un message…"></div>
     <div class="note">Barre de saisie</div>
   </div>

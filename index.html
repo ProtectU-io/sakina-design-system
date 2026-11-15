@@ -81,6 +81,7 @@
   .apple { filter: brightness(0); }
   .dark .apple { filter: brightness(0) invert(1); }
   .check.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+  #route-planning [data-route-priorities] .chip.selected { color: var(--navy); }
 </style>
 </head>
 <body>
@@ -119,7 +120,7 @@
 
 <header>
   <img src="logos/svg/sakina-horizontal-blanc.svg" alt="Sakina">
-  <div><div class="title-l">Maquettes · MVP</div><div class="body-m" style="opacity:.75">19 écrans statiques · 390 × 844 · références pour l'implémentation Flutter</div></div>
+  <div><div class="title-l">Maquettes · MVP</div><div class="body-m" style="opacity:.75">22 écrans statiques · 390 × 844 · données fictives · références pour l'implémentation Flutter</div></div>
   <nav>
     <a href="index.html" aria-current="page">Écrans</a>
     <a href="design-system.html">Design system</a>
@@ -275,7 +276,7 @@
 </div></figure>
 
 <!-- 07 Map home -->
-<figure><figcaption>07 · Carte (accueil)<span>onglet Carte + bouton d'alerte</span></figcaption>
+<figure id="carte"><figcaption>07 · Carte (accueil)<span>carte autonome · assistant à la demande</span></figcaption>
 <div class="screen light" data-auto-theme>
   <div class="map"><svg><use href="#map"/></svg></div>
   <div class="pin" style="left:98px;top:250px"><div class="marker place"><span class="icon fill" style="--i:url(icons/mosque-fill.svg)"></span></div></div>
@@ -300,9 +301,9 @@
   <div class="iconbtn filled" style="position:absolute;right:28px;bottom:296px;z-index:4;background:var(--surface-card)"><span class="icon" style="--i:url(icons/my_location.svg)"></span></div>
   <div class="card" style="position:absolute;left:16px;right:16px;bottom:100px;z-index:4">
     <div class="hstack">
-      <div class="lead"><span class="icon" style="--i:url(icons/home.svg)"></span></div>
-      <div class="grow"><div class="title-s">Rentrer à la maison</div><div class="body-s muted">18 min à pied · 1,4 km</div></div>
-      <button class="btn" style="height:40px;padding:0 16px;font-size:14px">Y aller</button>
+      <div class="lead"><span class="icon" style="--i:url(icons/auto_awesome.svg)"></span></div>
+      <div class="grow"><div class="title-s">Rentrer à la maison</div><div class="body-s muted">2 trajets · 14 à 18 min</div></div>
+      <a class="btn" href="#route-planning" style="height:44px;padding:0 16px;font-size:14px;text-decoration:none">Comparer</a>
     </div>
   </div>
   <div data-component="fab-sos" style="bottom:190px"></div>
@@ -311,10 +312,13 @@
 </div></figure>
 
 <!-- 08 Route planning -->
-<figure><figcaption>08 · Itinéraire<span>destination, tracé, partage aux proches</span></figcaption>
-<div class="screen light" data-auto-theme>
+<figure><figcaption>08 · Itinéraire<span>2 trajets comparés · priorité pour ce trajet</span></figcaption>
+<div class="screen light" id="route-planning" data-auto-theme>
   <div class="map"><svg><use href="#map"/></svg></div>
-  <svg style="position:absolute;inset:0;z-index:1" viewBox="0 0 390 844"><path d="M200 440 L218 380 L222 300 L150 296 L140 210" fill="none" style="stroke:var(--secondary)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <svg style="position:absolute;inset:0;z-index:1" viewBox="0 0 390 844" aria-label="Deux tracés">
+    <path d="M200 440 L155 380 L140 210" fill="none" stroke="var(--on-surface-muted)" stroke-width="5" stroke-dasharray="8 8"/>
+    <path d="M200 440 L218 380 L222 300 L150 296 L140 210" fill="none" stroke="var(--secondary)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
   <div class="me" style="left:200px;top:440px;z-index:2"></div>
   <div class="pin" style="left:140px;top:214px;z-index:2"><div class="marker halal" style="background:var(--navy)"><span class="icon fill" style="--i:url(icons/home-fill.svg)"></span></div></div>
   <div class="pin" style="left:330px;top:400px"><div class="marker report"><span class="icon fill" style="--i:url(icons/do_not_step-fill.svg)"></span></div></div>
@@ -328,19 +332,63 @@
     </div>
     <span class="icon muted" style="--i:url(icons/swap_vert.svg)"></span>
   </div>
-  <div class="sheet stack" style="gap:14px">
+  <div class="sheet stack" style="gap:12px">
     <div class="handle" style="margin-bottom:0"></div>
-    <div class="hstack"><div class="grow"><div class="headline-m">18 min</div><div class="body-m muted">1,4 km · arrivée 21:47</div></div>
-      <div class="hstack" style="gap:6px"><span class="chip selected"><span class="icon" style="--i:url(icons/directions_walk.svg)"></span></span><span class="chip"><span class="icon" style="--i:url(icons/directions_bus.svg)"></span></span><span class="chip"><span class="icon" style="--i:url(icons/directions_car.svg)"></span></span></div></div>
-    <div class="card hstack" style="background:#f6ead2;color:var(--navy);padding:12px"><span class="icon fill" style="--i:url(icons/do_not_step-fill.svg);color:#8a6420"></span><div class="body-s grow">1 signalement près du trajet : « zone à éviter », rue Myrha, il y a 40 min.</div></div>
-    <div class="hstack"><div class="hstack grow" style="gap:0"><div class="avatar" style="border:2px solid var(--surface)">A</div><div class="avatar" style="margin-left:-10px;border:2px solid var(--surface);background:var(--gold)">Y</div><div class="body-m" style="margin-left:10px">Partager avec Amina et Youssef</div></div><div class="switch on"></div></div>
-    <button class="btn block"><span class="icon" style="--i:url(icons/navigation.svg)"></span>Démarrer le trajet</button>
+    <div class="headline-s">Choisir votre trajet</div>
+    <div class="hstack" data-route-priorities role="group" aria-label="Priorité pour ce trajet uniquement" style="gap:8px">
+      <button type="button" class="chip selected" aria-pressed="true" style="height:44px">Plus éclairé</button>
+      <button type="button" class="chip" aria-pressed="false" style="height:44px">Plus rapide</button>
+      <span class="body-s muted">pour ce trajet</span>
+    </div>
+    <div class="card" style="padding:12px 16px;border:2px solid var(--primary)">
+      <div class="hstack"><div class="title-m grow">18 min · 1,4 km</div><span class="badge" style="background:var(--primary-container);color:var(--navy)">Conseillé</span></div>
+      <div class="body-s muted">Mieux éclairé · mairie, 20:00</div>
+    </div>
+    <div class="card" style="padding:12px 16px">
+      <div class="title-m">14 min · 1,1 km</div>
+      <div class="body-s muted">Plus direct · éclairage peu renseigné</div>
+    </div>
+    <button class="btn block" style="flex:none"><span class="icon" style="--i:url(icons/navigation.svg)"></span>Démarrer le trajet</button>
+  </div>
+  <div data-component="home-ind"></div>
+</div></figure>
+<script>
+  const routePriorities = document.querySelectorAll('#route-planning [data-route-priorities] button');
+  routePriorities.forEach(button => {
+    button.addEventListener('click', () => {
+      routePriorities.forEach(priority => {
+        const selected = priority === button;
+        priority.classList.toggle('selected', selected);
+        priority.setAttribute('aria-pressed', String(selected));
+      });
+    });
+  });
+</script>
+
+<!-- 08b Route planning, no lighting data -->
+<figure><figcaption>08b · Itinéraire sans données<span>aucune préférence affichée</span></figcaption>
+<div class="screen light" data-auto-theme>
+  <div class="map"><svg><use href="#map"/></svg></div>
+  <svg style="position:absolute;inset:0;z-index:1" viewBox="0 0 390 844" aria-label="Deux tracés sans préférence">
+    <path d="M200 440 L155 380 L140 210" fill="none" stroke="var(--on-surface-muted)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M200 440 L218 380 L222 300 L150 296 L140 210" fill="none" stroke="var(--on-surface-muted)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="me" style="left:200px;top:440px;z-index:2"></div>
+  <div class="pin" style="left:140px;top:214px;z-index:2"><div class="marker halal" style="background:var(--navy)"><span class="icon fill" style="--i:url(icons/home-fill.svg)"></span></div></div>
+  <div data-component="status" data-time="9:41"></div>
+  <div class="sheet stack" style="gap:12px">
+    <div class="handle" style="margin-bottom:0"></div>
+    <div class="headline-s">Choisir votre trajet</div>
+    <div class="hstack body-s" role="status"><span class="icon muted" style="--i:url(icons/light_mode.svg)"></span>Éclairage non renseigné : je ne peux pas départager.</div>
+    <div class="card" style="padding:12px 16px"><div class="title-m">Option A · 18 min</div><div class="body-s muted">Par l’avenue</div></div>
+    <div class="card" style="padding:12px 16px"><div class="title-m">Option B · 14 min</div><div class="body-s muted">Par les rues directes</div></div>
+    <button class="btn block" style="flex:none"><span class="icon" style="--i:url(icons/navigation.svg)"></span>Démarrer le trajet</button>
   </div>
   <div data-component="home-ind"></div>
 </div></figure>
 
 <!-- 09 Active trip -->
-<figure><figcaption>09 · Trajet en cours<span>position partagée jusqu'à l'arrivée</span></figcaption>
+<figure><figcaption>09 · Trajet en cours<span>conseil sur demande · voix sur appui</span></figcaption>
 <div class="screen dark" data-auto-theme>
   <div class="map"><svg><use href="#map"/></svg></div>
   <svg style="position:absolute;inset:0;z-index:1" viewBox="0 0 390 844"><path d="M218 380 L222 300 L150 296 L140 210" fill="none" style="stroke:var(--primary)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M200 440 L218 380" fill="none" style="stroke:var(--primary)" stroke-opacity=".3" stroke-width="7" stroke-linecap="round"/></svg>
@@ -351,12 +399,12 @@
     <span class="icon" style="--i:url(icons/turn_left.svg);font-size:36px;color:var(--gold-light)"></span>
     <div><div class="headline-s">Dans 120 m</div><div class="body-m muted">Tournez à gauche · bd Barbès</div></div>
   </div>
-  <div data-component="fab-sos" style="bottom:300px"></div>
-  <div class="sheet stack" style="gap:14px">
+  <div data-component="fab-sos" style="bottom:340px"></div>
+  <div class="sheet stack" style="gap:12px">
     <div class="handle" style="margin-bottom:0"></div>
-    <div class="hstack"><div class="grow"><div class="headline-m">12 min</div><div class="body-m muted">900 m · arrivée 21:47</div></div><span class="badge live"><span class="icon fill" style="--i:url(icons/circle-fill.svg);font-size:14px"></span>En direct</span></div>
-    <div class="card hstack"><div class="hstack" style="gap:0"><div class="avatar">A</div><div class="avatar" style="margin-left:-10px;background:var(--gold);color:var(--navy)">Y</div></div><div class="grow"><div class="title-s">Amina et Youssef vous suivent</div><div class="body-s muted">Le partage s'arrête automatiquement à l'arrivée.</div></div></div>
-    <div class="hstack"><button class="btn tonal grow" style="height:48px"><span class="icon" style="--i:url(icons/add_location_alt.svg)"></span>Signaler</button><button class="btn outline grow" style="height:48px">Arrêter le trajet</button></div>
+    <div class="hstack"><div class="grow"><div class="headline-m">12 min</div><div class="body-m muted">900 m · arrivée 21:47</div></div><button class="btn outline" aria-label="Appuyer pour parler à l’assistant" style="height:48px;width:48px;padding:0"><span class="icon" style="--i:url(icons/mic.svg)"></span></button></div>
+    <div data-component="ai-msg"><span slot="message">Le boulevard est mieux éclairé. Vous pouvez garder ce trajet.<br><span class="body-s muted">Mairie · 20:00</span></span></div>
+    <div class="hstack" style="gap:8px"><button class="btn tonal grow" style="height:48px;padding:0 10px;font-size:14px"><span class="icon" style="--i:url(icons/share_location.svg)"></span>Partager</button><button class="btn tonal grow" style="height:48px;padding:0 10px;font-size:14px"><span class="icon" style="--i:url(icons/add_location_alt.svg)"></span>Signaler</button><button class="btn outline grow" style="height:48px;padding:0 10px;font-size:14px">Arrêter</button></div>
   </div>
   <div data-component="home-ind"></div>
 </div></figure>
@@ -479,22 +527,24 @@
 </div></figure>
 
 <!-- 15 AI assistant -->
-<figure><figcaption>15 · Assistant Sakina<span>bouton IA en haut des onglets · conseils et orientation</span></figcaption>
+<figure id="assistant"><figcaption>15 · Assistant Sakina<span>conversation à la demande · dit quand il ne sait pas</span></figcaption>
 <div class="screen light" data-auto-theme>
   <div data-component="status" data-time="9:41"></div>
   <div class="appbar" style="padding:0 12px">
-    <div class="iconbtn"><span class="icon" style="--i:url(icons/arrow_back.svg)"></span></div>
+    <a class="iconbtn" href="#carte" aria-label="Retour à la carte" style="color:var(--on-surface)"><span class="icon" style="--i:url(icons/arrow_back.svg)"></span></a>
     <div data-component="ai-btn" style="box-shadow:none"></div>
-    <div class="grow"><div class="title-m">Assistant Sakina</div><div class="body-s muted">Conseils et orientation</div></div>
+    <div class="grow"><div class="title-m">Assistant Sakina</div><div class="body-s muted">IA · à votre demande</div></div>
   </div>
   <div class="body stack" style="gap:10px;padding-top:8px">
-    <div class="card hstack" style="padding:10px 14px;background:var(--alert-soft);color:var(--navy)"><span class="icon fill" style="--i:url(icons/shield-fill.svg);color:var(--alert);font-size:20px"></span><div class="body-s">L'assistant ne remplace pas les secours. <b>En danger, appelez le 17.</b></div></div>
-    <div data-component="ai-msg"><span slot="message">Bonjour Salma. Je peux vous aider à préparer un trajet, comprendre vos droits ou trouver un lieu sûr.</span></div>
-    <div class="hstack" style="gap:8px;flex-wrap:wrap">
-      <span class="chip">Que faire si l'on me suit ?</span><span class="chip">Lieu ouvert la nuit</span><span class="chip">Porter plainte</span>
-    </div>
-    <div class="bubble mine">On m'a insultée dans le métro hier. Que puis-je faire ?</div>
-    <div data-component="ai-msg"><span slot="message">Vous pouvez porter plainte au commissariat, même sans connaître l'auteur. Notez dès maintenant la date, l'heure, la ligne et les témoins éventuels.</span><div slot="actions"><button class="btn tonal"><span class="icon" style="--i:url(icons/report.svg)"></span>Signaler</button><button class="btn outline"><span class="icon" style="--i:url(icons/gavel.svg)"></span>Soutien juridique</button></div></div>
+    <div class="bubble mine">Je découvre le quartier. Quel trajet choisir ?</div>
+    <div data-component="ai-msg"><span slot="message">18 min : mieux éclairé. 14 min : plus direct. Que préférez-vous ?<br><span class="body-s muted">Mairie · 20:00</span></span><div slot="actions"><button class="btn outline" style="height:44px">Plus éclairé</button><button class="btn outline" style="height:44px">Plus rapide</button></div></div>
+    <div class="bubble mine">Et la rue d’après ?</div>
+    <div data-component="ai-msg"><span slot="message">Je n’ai pas de données d’éclairage pour cette rue. Je ne peux pas vous conseiller.</span></div>
+  </div>
+  <div class="hstack" style="padding:12px 16px 0;gap:8px">
+    <a class="btn outline grow" href="#carte" style="height:44px;padding:0 12px;font-size:14px;text-decoration:none">Carte</a>
+    <button class="btn outline grow" style="height:44px;padding:0 12px;font-size:14px">Partager</button>
+    <button class="btn alert grow" style="height:44px;padding:0 12px;font-size:14px">SOS</button>
   </div>
   <div data-component="composer" style="padding:8px 16px 34px" data-placeholder="Posez votre question…" data-send-label="Envoyer"></div>
   <div data-component="home-ind"></div>
@@ -585,21 +635,27 @@
   <div data-component="status" data-time="9:41"></div>
   <div class="body">
     <div class="hstack" style="margin:8px 0 20px"><div class="avatar" style="width:64px;height:64px;font-size:24px">S</div><div class="grow"><div class="headline-s">Salma Diallo</div><div class="body-s muted">salma.d@exemple.fr</div></div><span class="icon muted" style="--i:url(icons/edit.svg)"></span><div data-component="ai-btn" aria-label="Assistant Sakina"></div></div>
-    <div class="label-m muted" style="margin-bottom:4px">CONFIDENTIALITÉ</div>
+    <div class="label-m muted" style="margin-bottom:4px">ASSISTANT IA</div>
     <div class="card" style="padding:0 16px">
-      <div class="tile"><span class="icon muted" style="--i:url(icons/share_location.svg)"></span><div class="grow"><div class="title-s">Partage de position</div><div class="body-s muted">Uniquement pendant un trajet</div></div><div class="switch on"></div></div>
+      <div class="tile" style="padding:10px 0"><span class="icon muted" style="--i:url(icons/auto_awesome.svg)"></span><div class="grow title-s" id="suggestions-label">Suggestions pendant le trajet</div><div class="switch" role="switch" aria-checked="false" aria-readonly="true" aria-labelledby="suggestions-label"></div></div>
       <div class="divider"></div>
-      <div class="tile"><span class="icon muted" style="--i:url(icons/notifications_active.svg)"></span><div class="grow"><div class="title-s">Alertes de proximité</div><div class="body-s muted">Être prévenue si quelqu'un a besoin d'aide</div></div><div class="switch on"></div></div>
+      <div class="tile" style="padding:10px 0"><span class="icon muted" style="--i:url(icons/chat.svg)"></span><div class="grow title-s" id="history-label">Garder l’historique</div><div class="switch" role="switch" aria-checked="false" aria-readonly="true" aria-labelledby="history-label"></div></div>
+    </div>
+    <div class="label-m muted" style="margin:18px 0 4px">CONFIDENTIALITÉ</div>
+    <div class="card" style="padding:0 16px">
+      <div class="tile" style="padding:10px 0"><span class="icon muted" style="--i:url(icons/share_location.svg)"></span><div class="grow"><div class="title-s" id="sharing-label">Partage de position</div><div class="body-s muted">Accord à chaque trajet</div></div><div class="switch" role="switch" aria-checked="false" aria-readonly="true" aria-labelledby="sharing-label"></div></div>
       <div class="divider"></div>
-      <div class="tile"><span class="icon muted" style="--i:url(icons/visibility_off.svg)"></span><div class="grow"><div class="title-s">Signalements anonymes</div><div class="body-s muted">Votre nom n'est jamais affiché</div></div><div class="switch on"></div></div>
+      <div class="tile" style="padding:10px 0"><span class="icon muted" style="--i:url(icons/notifications_active.svg)"></span><div class="grow title-s">Alertes de proximité</div><div class="switch on"></div></div>
+      <div class="divider"></div>
+      <div class="tile" style="padding:10px 0"><span class="icon muted" style="--i:url(icons/visibility_off.svg)"></span><div class="grow title-s">Signalements anonymes</div><div class="switch on"></div></div>
     </div>
     <div class="label-m muted" style="margin:18px 0 4px">MES DONNÉES</div>
     <div class="card" style="padding:0 16px">
-      <div class="tile" style="padding:12px 0"><span class="icon muted" style="--i:url(icons/download.svg)"></span><div class="grow title-s">Télécharger mes données</div><span class="icon muted" style="--i:url(icons/chevron_right.svg)"></span></div>
+      <div class="tile" style="padding:10px 0"><span class="icon muted" style="--i:url(icons/download.svg)"></span><div class="grow title-s">Télécharger mes données</div><span class="icon muted" style="--i:url(icons/chevron_right.svg)"></span></div>
       <div class="divider"></div>
-      <div class="tile" style="padding:12px 0"><span class="icon muted" style="--i:url(icons/gavel.svg)"></span><div class="grow title-s">Être accompagné juridiquement</div><span class="badge" style="background:var(--primary-container);color:var(--navy)">Bientôt</span></div>
+      <div class="tile" style="padding:10px 0"><span class="icon muted" style="--i:url(icons/gavel.svg)"></span><div class="grow title-s">Accompagnement juridique</div><span class="badge" style="background:var(--primary-container);color:var(--navy)">Bientôt</span></div>
     </div>
-    <button class="btn text" style="margin-top:12px;align-self:flex-start"><span class="icon" style="--i:url(icons/logout.svg)"></span>Se déconnecter</button>
+    <button class="btn text" style="margin-top:8px;align-self:flex-start;height:44px;flex:none"><span class="icon" style="--i:url(icons/logout.svg)"></span>Se déconnecter</button>
   </div>
   <div data-component="fab-sos" style="bottom:calc(84px + var(--s-md))"></div>
   <div class="bottom"><div data-component="navbar" data-active="profile"></div></div>
