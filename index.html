@@ -44,9 +44,8 @@
   .pin { position: absolute; transform: translate(-50%, -100%); }
   .me { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--sky); border: 4px solid #fff; box-shadow: 0 0 0 10px rgb(118 179 226 / 0.3); }
 
-  /* Floating bottom area: alert FAB above NavigationBar */
+  /* Floating bottom area: alert FAB above the AI bar */
   .bottom { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; }
-  .bottom .navbar { padding-bottom: 14px; height: 84px; }
 
   /* Modal bottom sheet */
   .sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; background: var(--surface); border-radius: 28px 28px 0 0; padding: 12px var(--s-lg) 34px; box-shadow: 0 -8px 30px rgb(20 32 78 / 0.18); }
@@ -120,7 +119,7 @@
 
 <header>
   <img src="logos/svg/sakina-horizontal-blanc.svg" alt="Sakina">
-  <div><div class="title-l">Maquettes · MVP</div><div class="body-m" style="opacity:.75">22 écrans statiques · 390 × 844 · données fictives · références pour l'implémentation Flutter</div></div>
+  <div><div class="title-l">Maquettes · MVP</div><div class="body-m" style="opacity:.75">23 écrans statiques · 390 × 844 · données fictives · références pour l'implémentation Flutter</div></div>
   <nav>
     <a href="index.html" aria-current="page">Écrans</a>
     <a href="design-system.html">Design system</a>
@@ -287,9 +286,8 @@
   <div data-component="status" data-time="9:41"></div>
   <div style="position:relative;z-index:4;padding:4px 16px 0" class="stack">
     <div class="hstack">
+      <a class="iconbtn filled" href="#menu" aria-label="Ouvrir le menu" style="color:inherit;width:52px;height:52px"><span class="icon" style="--i:url(icons/menu.svg)"></span></a>
       <div class="input grow" style="box-shadow:var(--shadow);border:0"><span class="icon" style="--i:url(icons/search.svg)"></span>Où allez-vous ?</div>
-      <div data-component="ai-btn" aria-label="Assistant Sakina"></div>
-      <div class="avatar" style="width:48px;height:48px;box-shadow:var(--shadow)">S</div>
     </div>
     <div class="hstack" style="gap:8px;overflow:hidden">
       <span class="chip selected" style="box-shadow:var(--shadow)"><span class="icon" style="--i:url(icons/layers.svg)"></span>Tout</span>
@@ -307,7 +305,17 @@
     </div>
   </div>
   <div data-component="fab-sos" style="bottom:190px"></div>
-  <div class="bottom"><div data-component="navbar" data-active="map"></div></div>
+  <div class="bottom"><div data-component="ai-bar"></div></div>
+  <div data-component="home-ind"></div>
+</div></figure>
+
+<!-- 07b Navigation drawer -->
+<figure id="menu"><figcaption>07b · Menu latéral<span>depuis la carte · chaque entrée ouvre un écran</span></figcaption>
+<div class="screen light" data-auto-theme>
+  <div class="map"><svg><use href="#map"/></svg></div>
+  <div class="scrim" style="background:rgb(20 32 78 / 0.5)"></div>
+  <div data-component="status" data-time="9:41" style="z-index:7"></div>
+  <div data-component="drawer" style="position:absolute;top:0;bottom:0;left:0;z-index:6;padding-top:70px"></div>
   <div data-component="home-ind"></div>
 </div></figure>
 
@@ -551,12 +559,12 @@
 </div></figure>
 
 <!-- 16 Places list -->
-<figure><figcaption>16 · Lieux de confiance<span>onglet Lieux (Halal places)</span></figcaption>
+<figure id="lieux"><figcaption>16 · Lieux de confiance<span>ouvert depuis le menu · retour vers la carte</span></figcaption>
 <div class="screen light" data-auto-theme>
   <div data-component="status" data-time="9:41"></div>
   <div class="body" style="padding:0">
     <div style="padding:8px 24px 0" class="stack">
-      <div class="hstack"><div class="headline-l grow">Lieux</div><div class="iconbtn"><span class="icon" style="--i:url(icons/map.svg)"></span></div><div data-component="ai-btn" aria-label="Assistant Sakina"></div></div>
+      <div class="hstack"><a class="iconbtn" href="#carte" aria-label="Retour à la carte" style="color:var(--on-surface);margin-left:-10px"><span class="icon" style="--i:url(icons/arrow_back.svg)"></span></a><div class="headline-l grow">Lieux</div></div>
       <div class="input"><span class="icon" style="--i:url(icons/search.svg)"></span>Mosquée, boucherie, association…</div>
     </div>
     <div class="hstack" style="gap:8px;padding:14px 24px;overflow:hidden">
@@ -571,7 +579,7 @@
     </div>
   </div>
   <div data-component="fab-sos" style="bottom:calc(84px + var(--s-md))"></div>
-  <div class="bottom"><div data-component="navbar" data-active="places"></div></div>
+  <div class="bottom"><div data-component="ai-bar"></div></div>
   <div data-component="home-ind"></div>
 </div></figure>
 
@@ -604,11 +612,11 @@
 </div></figure>
 
 <!-- 18 Trusted contacts -->
-<figure><figcaption>18 · Proches<span>contacts de confiance et suivi</span></figcaption>
+<figure id="proches"><figcaption>18 · Mes proches<span>ouvert depuis le menu · retour vers la carte</span></figcaption>
 <div class="screen light" data-auto-theme>
   <div data-component="status" data-time="9:41"></div>
   <div class="body">
-    <div class="hstack" style="margin-top:8px"><div class="headline-l grow">Proches</div><div data-component="ai-btn" aria-label="Assistant Sakina"></div></div>
+    <div class="hstack" style="margin-top:8px"><a class="iconbtn" href="#carte" aria-label="Retour à la carte" style="color:var(--on-surface);margin-left:-10px"><span class="icon" style="--i:url(icons/arrow_back.svg)"></span></a><div class="headline-l grow">Mes proches</div></div>
     <div class="body-m muted" style="margin:6px 0 20px">Ils sont prévenus quand vous signalez, alertez ou partagez un trajet.</div>
     <div class="card stack dark" style="background:var(--navy);gap:12px">
       <div class="hstack"><div class="avatar" style="background:var(--gold-light);color:var(--navy)">Y</div><div class="grow"><div class="title-s">Youssef est en trajet</div><div class="body-s" style="opacity:.75">Arrivée prévue 21:47 · 900 m restants</div></div><span class="badge live"><span class="icon fill" style="--i:url(icons/circle-fill.svg);font-size:12px"></span>En direct</span></div>
@@ -625,16 +633,16 @@
     <button class="btn tonal block" style="margin-top:16px"><span class="icon" style="--i:url(icons/person_add.svg)"></span>Ajouter depuis le répertoire</button>
   </div>
   <div data-component="fab-sos" style="bottom:calc(84px + var(--s-md))"></div>
-  <div class="bottom"><div data-component="navbar" data-active="contacts"></div></div>
+  <div class="bottom"><div data-component="ai-bar"></div></div>
   <div data-component="home-ind"></div>
 </div></figure>
 
 <!-- 19 Profile -->
-<figure><figcaption>19 · Profil et confidentialité<span>réglages et données</span></figcaption>
+<figure id="profil"><figcaption>19 · Profil et confidentialité<span>Réglages ou en-tête du menu · retour vers la carte</span></figcaption>
 <div class="screen light" data-auto-theme>
   <div data-component="status" data-time="9:41"></div>
   <div class="body">
-    <div class="hstack" style="margin:8px 0 20px"><div class="avatar" style="width:64px;height:64px;font-size:24px">S</div><div class="grow"><div class="headline-s">Salma Diallo</div><div class="body-s muted">salma.d@exemple.fr</div></div><span class="icon muted" style="--i:url(icons/edit.svg)"></span><div data-component="ai-btn" aria-label="Assistant Sakina"></div></div>
+    <div class="hstack" style="margin:8px 0 20px"><a class="iconbtn" href="#carte" aria-label="Retour à la carte" style="color:var(--on-surface);margin-left:-10px"><span class="icon" style="--i:url(icons/arrow_back.svg)"></span></a><div class="avatar" style="width:64px;height:64px;font-size:24px">S</div><div class="grow"><div class="headline-s">Salma Diallo</div><div class="body-s muted">salma.d@exemple.fr</div></div><span class="icon muted" style="--i:url(icons/edit.svg)"></span></div>
     <div class="label-m muted" style="margin-bottom:4px">ASSISTANT IA</div>
     <div class="card" style="padding:0 16px">
       <div class="tile" style="padding:10px 0"><span class="icon muted" style="--i:url(icons/auto_awesome.svg)"></span><div class="grow title-s" id="suggestions-label">Suggestions pendant le trajet</div><div class="switch" role="switch" aria-checked="false" aria-readonly="true" aria-labelledby="suggestions-label"></div></div>
@@ -658,7 +666,7 @@
     <button class="btn text" style="margin-top:8px;align-self:flex-start;height:44px;flex:none"><span class="icon" style="--i:url(icons/logout.svg)"></span>Se déconnecter</button>
   </div>
   <div data-component="fab-sos" style="bottom:calc(84px + var(--s-md))"></div>
-  <div class="bottom"><div data-component="navbar" data-active="profile"></div></div>
+  <div class="bottom"><div data-component="ai-bar"></div></div>
   <div data-component="home-ind"></div>
 </div></figure>
 

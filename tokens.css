@@ -198,17 +198,22 @@ a { color: var(--page-link); }
   box-shadow: var(--shadow-sm);
 }
 
-/* NavigationBar */
-.navbar {
-  box-sizing: border-box; /* height includes padding, so floating elements can offset from it */
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  height: 80px; padding-top: var(--s-sm);
-  background: var(--surface-card); border-top: 1px solid var(--outline);
+/* NavigationDrawer (modal, opened from the menu button) */
+.drawer {
+  display: flex; flex-direction: column; gap: 4px; width: 300px; padding: var(--s-md) 12px;
+  background: var(--surface-card); color: var(--on-surface); border-radius: 0 28px 28px 0;
 }
-.navbar .item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--on-surface-muted); }
-.navbar .pill { width: 64px; height: 32px; border-radius: var(--r-pill); display: grid; place-items: center; }
-.navbar .item.active { color: var(--on-surface); }
-.navbar .item.active .pill { background: var(--primary-container); color: var(--on-primary-container); }
+.drawer-head { display: flex; align-items: flex-start; padding: 0 0 var(--s-md); }
+.drawer-user { flex: 1; display: flex; flex-direction: column; gap: 2px; padding: 0 var(--s-md); color: inherit; text-decoration: none; }
+.drawer-user .avatar { margin-bottom: 10px; }
+.drawer-close { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; flex: none; color: var(--on-surface-muted); }
+.drawer-user .avatar { width: 56px; height: 56px; font-size: 22px; }
+.drawer .item { display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 var(--s-md); border-radius: var(--r-pill); color: var(--on-surface); font: 600 14px/20px Inter, sans-serif; text-decoration: none; }
+
+/* AI bar: bottom slot freed by the drawer, always one tap from the assistant */
+.ai-bar { box-sizing: border-box; display: flex; align-items: center; gap: var(--s-xs); height: 84px; padding: 0 var(--s-md) 20px; }
+.ai-bar .input { flex: 1; height: 52px; box-shadow: var(--shadow); border: 0; }
+.ai-bar .input .icon { color: var(--secondary); }
 
 /* Alert FloatingActionButton (large, round, long-press) */
 .sos {

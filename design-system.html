@@ -151,11 +151,10 @@
   </div>
 
   <h2>Navigation et alerte</h2>
-  <p><code>NavigationBar</code> à 4 destinations + <code>FloatingActionButton.large</code> d'alerte, centré au-dessus de la barre. Déclenchement : appui long 2 s, puis compte à rebours de 5 s annulable.</p>
-  <div class="row" style="align-items:center;gap:48px">
-    <div class="light" data-auto-theme style="width:390px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)">
-      <div data-component="navbar" data-active="map"></div>
-    </div>
+  <p><code>NavigationDrawer</code> modal, ouvert depuis la carte par le bouton menu. L’en-tête mène au profil ; chaque entrée ouvre un écran en navigation push, avec retour vers la carte. Le bas de l’écran devient la barre IA « Demander à Sakina » (texte ou micro sur appui). <code>FloatingActionButton.large</code> d'alerte au-dessus, à droite. Déclenchement : appui long 2 s, puis compte à rebours de 5 s annulable.</p>
+  <div class="row" style="align-items:flex-start;gap:48px">
+    <div class="light" data-auto-theme style="border-radius:0 28px 28px 0;overflow:hidden;box-shadow:var(--shadow)"><div data-component="drawer"></div></div>
+    <div class="light" data-auto-theme style="width:390px;border-radius:16px;background:var(--surface);padding-top:16px"><div data-component="ai-bar"></div></div>
     <div style="text-align:center"><div data-component="sos"></div><div class="note" style="margin-top:8px">Bouton d'alerte 72 × 72</div></div>
   </div>
 
@@ -188,12 +187,14 @@
 <!-- Source unique des composites, utilisée ici et dans index.html par components.js. -->
 <template data-component-template="status"><div class="status"><span data-param="time">9:41</span><span class="icons"><span class="icon" style="--i:url(icons/signal_cellular_alt.svg)"></span><span class="icon" style="--i:url(icons/wifi.svg)"></span><span class="icon" style="--i:url(icons/battery_full.svg)"></span></span></div></template>
 <template data-component-template="home-ind"><div class="home-ind"></div></template>
-<template data-component-template="navbar"><nav class="navbar">
-  <div class="item" data-destination="map" data-icon="icons/map.svg" data-active-icon="icons/map-fill.svg"><div class="pill"><span class="icon" style="--i:url(icons/map.svg)"></span></div><span class="label-m">Carte</span></div>
-  <div class="item" data-destination="places" data-icon="icons/mosque.svg" data-active-icon="icons/mosque-fill.svg"><div class="pill"><span class="icon" style="--i:url(icons/mosque.svg)"></span></div><span class="label-m">Lieux</span></div>
-  <div class="item" data-destination="contacts" data-icon="icons/group.svg" data-active-icon="icons/group-fill.svg"><div class="pill"><span class="icon" style="--i:url(icons/group.svg)"></span></div><span class="label-m">Proches</span></div>
-  <div class="item" data-destination="profile" data-icon="icons/person.svg" data-active-icon="icons/person-fill.svg"><div class="pill"><span class="icon" style="--i:url(icons/person.svg)"></span></div><span class="label-m">Profil</span></div>
+<template data-component-template="drawer"><nav class="drawer" aria-label="Navigation principale">
+  <div class="drawer-head"><a class="drawer-user" href="#profil" aria-label="Voir mon profil"><div class="avatar" data-param="initial">S</div><div class="title-s" data-param="name">Salma Diallo</div><div class="body-s muted" data-param="email">salma.d@exemple.fr</div></a><a class="drawer-close" href="#carte" aria-label="Fermer le menu"><span class="icon" style="--i:url(icons/close.svg)"></span></a></div>
+  <div class="divider" style="margin:0 16px 8px"></div>
+  <a class="item" href="#lieux"><span class="icon" style="--i:url(icons/mosque.svg)"></span>Lieux</a>
+  <a class="item" href="#proches"><span class="icon" style="--i:url(icons/group.svg)"></span>Mes proches</a>
+  <a class="item" href="#profil"><span class="icon" style="--i:url(icons/settings.svg)"></span>Réglages</a>
 </nav></template>
+<template data-component-template="ai-bar"><div class="ai-bar"><div class="input"><span class="icon" style="--i:url(icons/auto_awesome.svg)"></span>Demander à Sakina…</div><div class="ai-btn" aria-label="Appuyer pour parler à l’assistant"><span class="icon" style="--i:url(icons/mic.svg)"></span></div></div></template>
 <template data-component-template="sos"><div class="sos"><span class="icon fill" style="--i:url(icons/sos-fill.svg)"></span></div></template>
 <template data-component-template="fab-sos"><div class="fab-sos"><div data-component="sos"></div></div></template>
 <template data-component-template="ai-btn"><div class="ai-btn"><span class="icon" style="--i:url(icons/auto_awesome.svg)"></span></div></template>

@@ -60,17 +60,6 @@
         if (content) slot.replaceWith(...content.childNodes);
         else slot.parentElement.remove();
       });
-      fragment.querySelectorAll("[data-destination]").forEach((item) => {
-        const active =
-          item.dataset.destination === (host.dataset.active || "map");
-        item.classList.toggle("active", active);
-        const icon = item.querySelector(".icon");
-        icon.classList.toggle("fill", active);
-        icon.style.setProperty(
-          "--i",
-          `url(${active ? item.dataset.activeIcon : item.dataset.icon})`,
-        );
-      });
       fragment.querySelectorAll("[data-component]").forEach((child) => {
         child.replaceWith(
           render(child, [...ancestors, host.dataset.component]),
